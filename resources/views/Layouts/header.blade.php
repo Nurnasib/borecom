@@ -17,8 +17,7 @@
                     <div class="header-menu">
                         <ul>
                             <li><a href="#">English</a></li>
-                            <li><a href="#">French</a></li>
-                            <li><a href="#">Spanish</a></li>
+                            <li><a href="#">Bangla</a></li>
                         </ul>
                     </div><!-- End .header-menu -->
                 </div><!-- End .header-dropdown -->
@@ -29,7 +28,7 @@
                     <li>
                         <a href="#">Links</a>
                         <ul>
-                            <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
+                            <li><a href="tel:#"><i class="icon-phone"></i>Call: +01552 383041</a></li>
                             <li><a href="wishlist.html"><i class="icon-heart-o"></i>My Wishlist <span>(3)</span></a></li>
                             <li><a href="about.html">About Us</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
@@ -56,7 +55,7 @@
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
                         <li class="megamenu-container active">
-                            <a href="index.html" class="sf-with-ul">Home</a>
+                            <a href="{{route('category.index')}}" class="sf-with-ul">Home</a>
 
                             <div class="megamenu demo">
                                 <div class="menu-col">
@@ -298,7 +297,7 @@
                             </div><!-- End .megamenu megamenu-md -->
                         </li>
                         <li>
-                            <a href="product.html" class="sf-with-ul">Product</a>
+                            <a href="{{route('category.index')}}" class="sf-with-ul">Product</a>
 
                             <div class="megamenu megamenu-sm">
                                 <div class="row no-gutters">
@@ -306,8 +305,8 @@
                                         <div class="menu-col">
                                             <div class="menu-title">Product Details</div><!-- End .menu-title -->
                                             <ul>
-                                                <li><a href="product.html">Default</a></li>
-                                                <li><a href="product-centered.html">Centered</a></li>
+                                                <li><a href="{{route('category.index')}}">Product Category Boxed</a></li>
+                                                <li><a href="{{route('products.index')}}">Add New Product</a></li>
                                                 <li><a href="product-extended.html"><span>Extended Info<span class="tip tip-new">New</span></span></a></li>
                                                 <li><a href="product-gallery.html">Gallery</a></li>
                                                 <li><a href="product-sticky.html">Sticky Info</a></li>

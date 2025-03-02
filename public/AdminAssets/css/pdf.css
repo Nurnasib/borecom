@@ -1,0 +1,101 @@
+
+.firstImage{
+    display:inline-block;
+    width:35%;
+    margin-left: 4rem;
+}
+.first{
+    font-style: italic;
+    font-size: 4rem;
+    color:#008000;
+    font-weight: 600;
+    margin:2px 1px;
+    font-weight: 900;
+}
+.header{
+    width:80%;
+    display:flex;
+    align-items: center;
+    margin:auto;
+    justify-content: space-between;
+}
+.all{
+}
+.second{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.h2{}
+.secondItem{
+    margin:auto;
+    width:80%;
+}
+.thirdPortion{
+    width:80%;
+    display: flex;
+    justify-content:space-between;
+    margin:auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.fourthPortion{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:auto;
+    width:80%;
+}
+.line{
+    line-height: 12px;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin:auto;
+    text-align: center;
+    border:1px solid #000000 !important;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+    border:1px solid #000000 !important;
+}
+
+tr:nth-child(even) {
+
+}
+.table-secondary{
+    background-color: 	#808080;
+}
+.bottom{
+    font-family: arial, sans-serif;
+    width: 80%;
+    margin:auto;
+}
+.bottomCenter{
+    width:95%;
+    margin:auto;
+}
+.orchid{
+    display:flex;
+    justify-content: space-between;
+}
+.footer{
+    font-family: arial, sans-serif;
+    width:100%;
+    margin:auto;
+    text-align: center;
+    line-height: .6rem;
+    font-size: 22px;
+    font-weight: 500;
+}
+th td{
+    text-align: center;
+}
+.th1 {
+    border: 1px solid #dddddd;
+    background-color: grey;
+    padding: 8px;
+}
+.red{
+    color:red;
+}
