@@ -58,6 +58,7 @@
                                                     <tbody>
                                                     @foreach($categories as $cat)
                                                         <tr>
+                                                            <td>{{ $cat->id }}</td>
                                                             <td>{{ $cat->category_name }}</td>
                                                             <td class="text-center">
                                                                 <!-- Edit and Delete buttons -->

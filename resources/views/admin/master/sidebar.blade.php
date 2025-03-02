@@ -44,19 +44,24 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item menu-open">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-list" style="color:#fa79ba"></i>
+
+
+
+
+
+                <li class="nav-item {{ request()->is('admin/categories','admin/category/*/edit','add-category','edit-category/*','all-sub-category','add-sub-category','edit-sub-category/*')? 'manu-is-opening menu-open active' : '' }}">
+                    <a href="#" class="nav-link {{request()->is('admin/categories', 'admin/category/*/edit') ? 'active':''}}">
+                        <i class="nav-icon fa-solid fa-list" style="color:#3fff00"></i>
                         <p>
                             Category
-                            <i class="right fas fa-angle-left"></i> <!-- Arrow indicator for submenu -->
+                            <i class="fas fa-angle-left right" style="color:#3fff00"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('categories.index')}}" class="nav-link">
+                        <li class="nav-item {{request()->is('admin/categories','admin/category/*/edit') ? 'manu-is-opening menu-open active':''}}">
+                            <a href="{{route('categories.index')}}" class="nav-link {{request()->is('admin/categories','admin/category/*/edit','edit-category/*') ? 'active':''}}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>List Category</p>
+                                <p>Category List</p>
                             </a>
                         </li>
                     </ul>
