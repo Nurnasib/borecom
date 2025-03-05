@@ -2,39 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('product.index');
+        $products = Products::all();
+        return view('admin.product.list',['products'=>$products]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('product.create');
+        $categories = Category::all();
+        return view('admin.product.add',['categories'=>$categories]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255',
+            'price' => 'required|integer',
+            'delivery_charge' => 'required|integer|max:255',
+            'required_advance' => 'required|string|max:255',
+            'color' => 'nullable|string|max:255',
+            'size' => 'nullable|string|max:255',
+            'status' => 'required|string|max:255'
+        ]);
+        $category = Category::where('id',$validatedData['category_id'])->first();
+        $validatedData['category_name'] = $category->category_name;
+        $validatedData['created_by'] = auth()->user()->id;
+
+        try {
+            Products::create($validatedData);
+        }catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+
+        return redirect('admin/product')->with('success', 'Product created successfully!');
     }
 
     /**

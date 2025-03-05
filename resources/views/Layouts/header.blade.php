@@ -306,7 +306,7 @@
                                             <div class="menu-title">Product Details</div><!-- End .menu-title -->
                                             <ul>
                                                 <li><a href="{{route('category.index')}}">Product Category Boxed</a></li>
-                                                <li><a href="{{route('products.index')}}">Add New Product</a></li>
+                                                <li><a href="{{route('product.index')}}">Add New Product</a></li>
                                                 <li><a href="product-extended.html"><span>Extended Info<span class="tip tip-new">New</span></span></a></li>
                                                 <li><a href="product-gallery.html">Gallery</a></li>
                                                 <li><a href="product-sticky.html">Sticky Info</a></li>
@@ -489,7 +489,7 @@
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">
-                            <a href="cart.html" class="btn btn-primary">View Cart</a>
+                            <a href="/cart" class="btn btn-primary">View Cart</a>
                             <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
                         </div><!-- End .dropdown-cart-total -->
                     </div><!-- End .dropdown-menu -->

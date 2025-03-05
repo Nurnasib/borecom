@@ -14,6 +14,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Scale</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="scale">
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label"></label>
                             <div class="col-md-9">
                                 <input type="submit" class="btn btn-primary">

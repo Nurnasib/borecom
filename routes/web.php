@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -20,13 +22,19 @@ use App\Http\Controllers\AdminCategoryController;
 */
 
 Route::get('/', function () {
-//    return view('Landing.landing');
-    return view('admin.auth.login');
+    return view('Landing.landing');
+//    return view('admin.auth.login');
 });
-Route::prefix('admin')->controller(CategoryController::class)->group(function () {
-    Route::resource('admin', AdminController::class);
+Route::get('/cart', function () {
+    return view('Landing.cart');
+//    return view('admin.auth.login');
+});
+Route::prefix('admin')->group(function () {
+//    Route::resource('admin', AdminController::class);
     Route::resource('category', CategoryController::class);
-    Route::resource('products', ProductController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('order', OrdersController::class);
+    Route::resource('payment', PaymentsController::class);
 });
 Route::get('/clear', function() {
 
@@ -41,13 +49,13 @@ Route::get('/clear', function() {
 Route::group(['prefix'=> 'admin','name'=>'Admin_Login'], function () {
     Route::get('/main', [AdminController::class,'index'])->name('login');
     Route::post('/main/checklogin', [AdminController::class,'checklogin'])->name('checklogin');
+    Route::get('main/successlogin', [AdminController::class,'successlogin'])->name('home');
     Route::resource('categories', AdminCategoryController::class);
     Route::get('/', [AdminController::class,'successlogin']);
     Route::post('main/logout', [AdminController::class,'logout'])->name('logout');
     Route::get('/download-db', [AdminController::class,'downloadDb'])->name('download-db');
 });
 Route::group(['name'=>'Category','middleware' => 'web',], function () {
-    Route::get('main/successlogin', [AdminController::class,'successlogin'])->name('home');
     Route::get('/add-category', [CategoryController::class,'addCategory'])->name('add.category');
     Route::post('/new-category', [CategoryController::class,'createCategory'])->name('new.category');
     Route::get('/all-category', [CategoryController::class,'categoryList'])->name('all.category');

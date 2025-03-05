@@ -52,6 +52,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Category Name</th>
+                                                        <th>Scale</th>
                                                         <th class="text-center">Actions</th>
                                                     </tr>
                                                     </thead>
@@ -60,6 +61,7 @@
                                                         <tr>
                                                             <td>{{ $cat->id }}</td>
                                                             <td>{{ $cat->category_name }}</td>
+                                                            <td>{{ $cat->scale }}</td>
                                                             <td class="text-center">
                                                                 <!-- Edit and Delete buttons -->
                                                                 <a href="{{ route('category.edit', ['category'=> $cat->id]) }}" class="btn btn-info btn-sm mx-1">

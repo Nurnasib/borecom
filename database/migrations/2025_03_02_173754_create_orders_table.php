@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->string('order_code');
             $table->string('color')->nullable();
+            $table->integer('pieces')->nullable();
+            $table->string('weight')->nullable();
             $table->string('size')->nullable();
             $table->enum('status', ['processing', 'cancelled', 'delivered', 'pending', 'placed'])->default('placed');
             $table->timestamps();

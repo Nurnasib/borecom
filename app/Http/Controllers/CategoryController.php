@@ -28,13 +28,6 @@ class CategoryController extends Controller
     {
         return view('category.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -43,7 +36,8 @@ class CategoryController extends Controller
 
         try {
             Category::create([
-                'category_name' => $request->category_name
+                'category_name' => $request->category_name,
+                'scale'         => $request->scale
             ]);
         }catch (\Exception $exception){
             return $exception->getMessage();
@@ -87,6 +81,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->category_name = $request->category_name;
+        $category->scale = $request->scale;
         $category->save();
         return redirect()->route('category.index')->with('success', 'Category updated successfully!');
     }

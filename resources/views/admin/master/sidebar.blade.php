@@ -49,7 +49,7 @@
 
 
 
-                <li class="nav-item {{ request()->is('admin/categories','admin/category/*/edit','add-category','edit-category/*','all-sub-category','add-sub-category','edit-sub-category/*')? 'manu-is-opening menu-open active' : '' }}">
+                <li class="nav-item {{ request()->is('admin/categories','admin/category/*/edit')? 'manu-is-opening menu-open active' : '' }}">
                     <a href="#" class="nav-link {{request()->is('admin/categories', 'admin/category/*/edit') ? 'active':''}}">
                         <i class="nav-icon fa-solid fa-list" style="color:#3fff00"></i>
                         <p>
@@ -59,9 +59,43 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item {{request()->is('admin/categories','admin/category/*/edit') ? 'manu-is-opening menu-open active':''}}">
-                            <a href="{{route('categories.index')}}" class="nav-link {{request()->is('admin/categories','admin/category/*/edit','edit-category/*') ? 'active':''}}">
+                            <a href="{{route('categories.index')}}" class="nav-link {{request()->is('admin/categories','admin/category/*/edit') ? 'active':''}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Category List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item {{ request()->is('admin/products','admin/products/*/edit')? 'manu-is-opening menu-open active' : '' }}">
+                    <a href="#" class="nav-link {{request()->is('admin/products', 'admin/product/*/edit') ? 'active':''}}">
+                        <i class="nav-icon fa-solid fa-list" style="color:#3fff00"></i>
+                        <p>
+                            Products
+                            <i class="fas fa-angle-left right" style="color:#3fff00"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item {{request()->is('admin/products','admin/product/*/edit') ? 'manu-is-opening menu-open active':''}}">
+                            <a href="{{route('product.index')}}" class="nav-link {{request()->is('admin/products','admin/product/*/edit') ? 'active':''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Products List</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item {{ request()->is('admin/orders','admin/order/*/edit')? 'manu-is-opening menu-open active' : '' }}">
+                    <a href="#" class="nav-link {{request()->is('admin/orders', 'admin/order/*/edit') ? 'active':''}}">
+                        <i class="nav-icon fa-solid fa-list" style="color:#3fff00"></i>
+                        <p>
+                            Orders
+                            <i class="fas fa-angle-left right" style="color:#3fff00"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item {{request()->is('admin/orders','admin/order/*/edit') ? 'manu-is-opening menu-open active':''}}">
+                            <a href="{{route('order.index')}}" class="nav-link {{request()->is('admin/orders','admin/order/*/edit') ? 'active':''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Products List</p>
                             </a>
                         </li>
                     </ul>
