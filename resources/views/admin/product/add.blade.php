@@ -1,4 +1,5 @@
 @extends('admin.master.app')
+
 @section('content')
     <div class="content-wrapper">
         <div class="col-md-7 py-5 mx-auto">
@@ -14,7 +15,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{route('product.store')}}" method="post" >
+                    <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Product Name<i class="text-danger">*</i></label>
@@ -27,7 +28,7 @@
                             <div class="col-md-9">
                                 <select required class="form-control" name="category_id">
                                     @foreach($categories as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->category_name}}</option>
+                                        <option value="{{$cat['id']}}">{{$cat['category_name']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -51,7 +52,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Size  (if any)</label>
+                            <label class="col-md-3 col-form-label">Size (if any)</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="size">
                             </div>
@@ -78,10 +79,17 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- Image Upload Field -->
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Product Image</label>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" name="product_image">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"></label>
                             <div class="col-md-9">
-                                <input type="submit" class="btn btn-primary">
+                                <input type="submit" class="btn btn-primary" value="Submit">
                             </div>
                         </div>
                     </form>
@@ -90,10 +98,3 @@
         </div>
     </div>
 @endsection
-<script>
-    import FindUrl from "../../js/components/FindUrl";
-    export default {
-        components: {FindUrl}
-    }
-</script>
-

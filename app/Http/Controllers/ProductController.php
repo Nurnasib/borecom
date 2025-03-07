@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -16,75 +17,142 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         return view('admin.product.add',['categories'=>$categories]);
     }
+
     public function store(Request $request)
     {
+//        dd(Auth::user());
+
+        if (!auth()->check()) {
+            return back()->withErrors(['error' => 'Unauthorized! Please login.']);
+        }
+        // Validate the request
         $validatedData = $request->validate([
             'product_name' => 'required|string|max:255',
-            'category_id' => 'required|string|max:255',
-            'price' => 'required|integer',
-            'delivery_charge' => 'required|integer|max:255',
-            'required_advance' => 'required|string|max:255',
-            'color' => 'nullable|string|max:255',
-            'size' => 'nullable|string|max:255',
-            'status' => 'required|string|max:255'
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric',
+            'delivery_charge' => 'required|numeric',
+            'color' => 'nullable|string|max:50',
+            'size' => 'nullable|string|max:50',
+            'required_advance' => 'required|string',
+            'status' => 'required|string|in:active,inactive,out_of_stock,discontinued',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $category = Category::where('id',$validatedData['category_id'])->first();
+
+        // Fetch category
+        $category = Category::find($validatedData['category_id']);
+        if (!$category) {
+            return back()->withErrors(['category_id' => 'Invalid category selected.']);
+        }
+
+        // Ensure 'created_by' is set
+        $validatedData['created_by'] = auth()->id();
         $validatedData['category_name'] = $category->category_name;
-        $validatedData['created_by'] = auth()->user()->id;
+
+        // Handle image upload and store the image in 'storage/app/public/products'
+        if ($request->hasFile('product_image')) {
+            // Store image and get the path
+            $filePath = $request->file('product_image')->store('products', 'public');
+            $validatedData['product_image'] = $filePath; // Save the file path to the database
+        }
 
         try {
             Products::create($validatedData);
-        }catch (\Exception $exception){
-            return $exception->getMessage();
+            return redirect()->route('product.create')->with('success', 'Product added successfully.');
+        } catch (\Exception $exception) {
+            Log::error('Product creation failed: ' . $exception->getMessage());
+            return back()->withErrors(['error' => 'Something went wrong. ' . $exception->getMessage()]);
         }
-
-        return redirect('admin/product')->with('success', 'Product created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $product = Products::findOrFail($id);
+        $categories = Category::all(); // Fetch all categories for dropdown
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        // Ensure user is authenticated
+        if (!auth()->check()) {
+            return back()->withErrors(['error' => 'Unauthorized! Please login.']);
+        }
+
+        // Validate the request
+        $validatedData = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric',
+            'delivery_charge' => 'required|numeric',
+            'color' => 'nullable|string|max:50',
+            'size' => 'nullable|string|max:50',
+            'required_advance' => 'required|string',
+            'status' => 'required|string|in:active,inactive,out_of_stock,discontinued',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Find the product
+        $product = Products::findOrFail($id);
+
+        // Fetch category
+        $category = Category::find($validatedData['category_id']);
+        if (!$category) {
+            return back()->withErrors(['category_id' => 'Invalid category selected.']);
+        }
+
+        // Assign updated values
+        $validatedData['created_by'] = auth()->id();
+        $validatedData['category_name'] = $category->category_name;
+
+        // Handle image upload
+        if ($request->hasFile('product_image')) {
+            // Delete the old image if exists
+            if ($product->product_image) {
+                Storage::disk('public')->delete($product->product_image);
+            }
+
+            // Store new image
+            $filePath = $request->file('product_image')->store('products', 'public');
+            $validatedData['product_image'] = $filePath;
+        }
+
+        try {
+            // Update product
+            $product->update($validatedData);
+            return redirect()->route('product.index')->with('success', 'Product updated successfully.');
+        } catch (\Exception $exception) {
+            Log::error('Product update failed: ' . $exception->getMessage());
+            return back()->withErrors(['error' => 'Something went wrong. ' . $exception->getMessage()]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        if (!auth()->check()) {
+            return back()->withErrors(['error' => 'Unauthorized! Please login.']);
+        }
+
+
+        $product = Products::findOrFail($id);
+
+        try {
+            if ($product->product_image) {
+                Storage::disk('public')->delete($product->product_image);
+            }
+            $product->delete();
+            return redirect()->route('product.index')->with('success', 'Product deleted successfully.');
+        } catch (\Exception $exception) {
+            Log::error('Product deletion failed: ' . $exception->getMessage());
+            return back()->withErrors(['error' => 'Something went wrong. ' . $exception->getMessage()]);
+        }
     }
 }

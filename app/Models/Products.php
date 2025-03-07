@@ -19,5 +19,6 @@ class Products extends Model
         'size',
         'created_by',
         'status',
+        'product_image',
     ];
 }

@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('category_name');
             $table->enum('required_advance',['deli', 'all', 'price', 'none'])->default('deli');
             $table->enum('status', ['active', 'inactive', 'out_of_stock', 'discontinued'])->default('active');
+            $table->string('product_image')->nullable();  // Add this line for product image
             $table->timestamps();
         });
     }

@@ -18,7 +18,6 @@
                 <a class="float-right btn bg-gradient-teal btn-sm mb-3" href="{{ route('product.create') }}">
                     <i class="fa fa-plus text-light"></i>
                 </a>
-
                 <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
@@ -30,8 +29,9 @@
                             <th>Price</th>
                             <th>Deliver Charge</th>
                             <th>Required Advanced</th>
-                            <th>color-size</th>
+                            <th>Color-Size</th>
                             <th>Status</th>
+                            <th>Image</th> <!-- New column for the image -->
                             <th class="text-center">Actions</th>
                         </tr>
                         </thead>
@@ -46,22 +46,26 @@
                                 <td>{{ $val->required_advance }}</td>
                                 <td>{{ $val->color }}-{{ $val->size }}</td>
                                 <td>{{ $val->status }}</td>
+                                <!-- Display the product image -->
+                                <td>
+                                    @if($val->product_image)
+                                        <img src="{{ asset('storage/' . $val->product_image) }}"  width="50" height="50">
+                                    @else
+                                        <span>No Image</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <!-- Edit and Delete buttons -->
-                                    <a href="{{ route('product.edit', ['product' => $val->id]) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('product.edit',['product' => $val->id])}}" class="btn btn-info btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('product.destroy', ['product' => $val->id]) }}" class="btn btn-danger btn-sm mx-2" onclick="return confirm('Are you sure you want to delete this product?');">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-
-{{--                                    <form action="{{route('product.destroy',['product' => $val->id])}}" method="POST" style="display: inline-block;">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <button type="submit" class="btn btn-danger btn-rounded" style="min-width: 10px!important;" onclick="return confirm('Are you sure you want to delete this product?');">--}}
-{{--                                            <i class="fas fa-trash-alt"></i>--}}
-{{--                                        </button>--}}
-{{--                                    </form>--}}
+                                    <form action="{{ route('product.destroy', ['product' => $val->id]) }}" method="POST" style="display: inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm mx-2" onclick="return confirm('Are you sure you want to delete this product?');">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
