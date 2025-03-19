@@ -14,7 +14,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{route('product.store')}}" method="post" >
+                    <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Product Name<i class="text-danger">*</i></label>
@@ -42,6 +42,18 @@
                             <label class="col-md-3 col-form-label">Delivery Charge<i class="text-danger">*</i></label>
                             <div class="col-md-9">
                                 <input type="number" required class="form-control" name="delivery_charge">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Image<i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <input type="file" required class="form-control" name="image">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Additional Images<i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <input type="file" required class="form-control" name="additional_images[]" multiple>
                             </div>
                         </div>
                         <div class="form-group row">

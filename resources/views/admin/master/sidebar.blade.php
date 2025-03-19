@@ -59,7 +59,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item {{request()->is('admin/categories','admin/category/*/edit') ? 'manu-is-opening menu-open active':''}}">
-                            <a href="{{route('categories.index')}}" class="nav-link {{request()->is('admin/categories','admin/category/*/edit') ? 'active':''}}">
+                            <a href="{{route('category.index')}}" class="nav-link {{request()->is('admin/categories','admin/category/*/edit') ? 'active':''}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Category List</p>
                             </a>

@@ -14,6 +14,8 @@ class Products extends Model
         'category_name',
         'price',
         'delivery_charge',
+        'image',
+        'additional_images',
         'required_advance',
         'color',
         'size',

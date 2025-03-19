@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PaymentsController;
 use Illuminate\Support\Facades\Artisan;
@@ -21,10 +22,9 @@ use App\Http\Controllers\AdminCategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('Landing.landing');
-//    return view('admin.auth.login');
-});
+Route::get('/', [LandingController::class,'landing'])->name('landing');
+Route::get('/product_detail/{id}', [ProductController::class,'productDetail'])->name('product.detail');
+Route::get('/cart-product-add/{id}', [ProductController::class,'cartAddProduct'])->name('cart.add.product');
 Route::get('/cart', function () {
     return view('Landing.cart');
 //    return view('admin.auth.login');
@@ -50,7 +50,6 @@ Route::group(['prefix'=> 'admin','name'=>'Admin_Login'], function () {
     Route::get('/main', [AdminController::class,'index'])->name('login');
     Route::post('/main/checklogin', [AdminController::class,'checklogin'])->name('checklogin');
     Route::get('main/successlogin', [AdminController::class,'successlogin'])->name('home');
-    Route::resource('categories', AdminCategoryController::class);
     Route::get('/', [AdminController::class,'successlogin']);
     Route::post('main/logout', [AdminController::class,'logout'])->name('logout');
     Route::get('/download-db', [AdminController::class,'downloadDb'])->name('download-db');

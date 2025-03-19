@@ -29,6 +29,8 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Deliver Charge</th>
+                            <th>Charge</th>
+                            <th>Deliver Charge</th>
                             <th>Required Advanced</th>
                             <th>color-size</th>
                             <th>Status</th>
@@ -43,6 +45,18 @@
                                 <td>{{ $val->category_name }}</td>
                                 <td>{{ $val->price }}</td>
                                 <td>{{ $val->delivery_charge }}</td>
+                                <td>
+                                    @if(isset($val->image))
+                                    <img src="{{ asset('storage/' . $val->image) }}" alt="Main Image" width="40">
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($val->additional_images))
+                                        @foreach (json_decode($val->additional_images) as $additional)
+                                            <img src="{{ asset('storage/' . $additional) }}" alt="Additional Image" width="30">
+                                        @endforeach
+                                    @endif
+                                </td>
                                 <td>{{ $val->required_advance }}</td>
                                 <td>{{ $val->color }}-{{ $val->size }}</td>
                                 <td>{{ $val->status }}</td>
