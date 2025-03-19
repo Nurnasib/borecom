@@ -22,7 +22,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"></label>
                             <div class="col-md-9">
-                                <input type="submit" class="btn btn-primary">
+                                <input type="submit" class="btn btn-primary" value="Submit" >
                             </div>
                         </div>
                     </form>
