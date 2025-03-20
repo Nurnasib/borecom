@@ -15,7 +15,7 @@
                 @endif
 
                 <!-- Add new category button -->
-                <a class="float-right btn bg-gradient-teal btn-sm mb-3" href="{{ route('categories.create') }}">
+                <a class="float-right btn bg-gradient-teal btn-sm mb-3" href="{{ route('category.create') }}">
                     <i class="fa fa-plus text-light"></i>
                 </a>
 
