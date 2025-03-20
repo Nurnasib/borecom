@@ -29,6 +29,8 @@ class ProductController extends Controller
             'color' => 'nullable|string|max:255',
             'size' => 'nullable|string|max:255',
             'status' => 'required|string|max:255',
+            'stock' => 'nullable|integer', // Specified as 'integer' to match migration
+            'description' => 'nullable|string', //
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'additional_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -94,38 +96,50 @@ class ProductController extends Controller
     }
 
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $product = Products::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'category_id' => 'required|string|max:255',
+            'price' => 'required|integer',
+            'delivery_charge' => 'required|integer|max:255',
+            'required_advance' => 'required|string|max:255',
+            'color' => 'nullable|string|max:255',
+            'size' => 'nullable|string|max:255',
+            'status' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'stock' => 'nullable|integer',
+            'description' => 'nullable|text', //
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $product = Products::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products_images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
+
+        $additionalImages = $product->additional_images ? json_decode($product->additional_images, true) : [];
+        if ($request->hasFile('additional_images')) {
+            foreach ($request->file('additional_images') as $image) {
+                $additionalImages[] = $image->store('products_images', 'public');
+            }
+        }
+        $validatedData['additional_images'] = json_encode($additionalImages);
+
+        $category = Category::find($validatedData['category_id']);
+        $validatedData['category_name'] = $category ? $category->category_name : $product->category_name;
+
+        $product->update($validatedData);
+
+        return redirect('admin/product')->with('success', 'Product updated successfully!');
     }
 }

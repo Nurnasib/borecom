@@ -27,7 +27,7 @@
                             <div class="col-md-9">
                                 <select required class="form-control" name="category_id">
                                     @foreach($categories as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->category_name}}</option>
+                                        <option value="{{$cat->id}}">{{$cat->category_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -72,10 +72,10 @@
                             <label class="col-md-3 col-form-label">Required Advance<i class="text-danger">*</i></label>
                             <div class="col-md-9">
                                 <select required class="form-control" name="required_advance">
-                                    <option selected>deli</option>
-                                    <option>all</option>
-                                    <option>price</option>
-                                    <option>none</option>
+                                    <option value="deli">Delivery Charge</option>
+                                    <option value="all">All price including DC</option>
+                                    <option value="price">Only price</option>
+                                    <option value="none">COD</option>
                                 </select>
                             </div>
                         </div>
@@ -90,6 +90,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Stock</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="stock" placeholder="Enter stock quantity">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Product Description</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="description" rows="4" placeholder="Enter product details..."></textarea>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"></label>
                             <div class="col-md-9">
@@ -108,4 +121,3 @@
         components: {FindUrl}
     }
 </script>
-

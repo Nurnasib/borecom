@@ -21,5 +21,7 @@ class Products extends Model
         'size',
         'created_by',
         'status',
+        'stock',  // Newly added
+        'product_description',  // Newly added
     ];
 }

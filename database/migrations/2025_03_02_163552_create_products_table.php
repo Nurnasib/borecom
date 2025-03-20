@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->integer('category_id');
             $table->string('category_name');
             $table->string('image')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('stock')->nullable();
             $table->string('additional_images', 500)->nullable();
             $table->enum('required_advance',['deli', 'all', 'price', 'none'])->default('deli');
             $table->enum('status', ['active', 'inactive', 'out_of_stock', 'discontinued'])->default('active');
