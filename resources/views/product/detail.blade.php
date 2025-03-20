@@ -103,7 +103,7 @@
                                     <span>Add to Cart</span>
                                 </a>
 
-                                <a href="{{route('')}}" class="btn btn-primary btn-rounded btn-shadow"
+                                <a href="{{route('cart-buy_now',$product->id)}}" class="btn btn-primary btn-rounded btn-shadow"
                                    style="width: 150px; text-align: center; padding: 10px 20px; display: inline-block; text-decoration: none; background-color: green; color: white; border: none;">
                                     <i class="fas fa-shopping-bag text-outline-success" style="margin-right: 5px;"></i>
                                     <span>Buy Now</span>
