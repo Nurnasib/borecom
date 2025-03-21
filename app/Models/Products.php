@@ -22,6 +22,6 @@ class Products extends Model
         'created_by',
         'status',
         'stock',  // Newly added
-        'product_description',  // Newly added
+        'description',  // Newly added
     ];
 }

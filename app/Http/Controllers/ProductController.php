@@ -30,7 +30,7 @@ class ProductController extends Controller
             'size' => 'nullable|string|max:255',
             'status' => 'required|string|max:255',
             'stock' => 'nullable|integer', // Specified as 'integer' to match migration
-            'description' => 'nullable|string', //
+            'description' => 'nullable', //
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'additional_images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -117,7 +117,7 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'stock' => 'nullable|integer',
-            'description' => 'nullable|text', //
+            'description' => 'nullable|string|max:5000', //
         ]);
 
         $product = Products::findOrFail($id);
