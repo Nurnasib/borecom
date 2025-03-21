@@ -1,30 +1,134 @@
 @extends('admin.master.app')
+
 @section('content')
     <div class="content-wrapper">
         <div class="col-md-7 py-5 mx-auto">
             <div class="card card-primary card-outline">
-                <div class="card-header text-center">{{ __('Edit Category Form') }}</div>
+                <div class="card-header text-center">{{ __('Edit Product Form') }}</div>
                 <div class="card-body">
-                    <form action="{{route('category.update',['category'=>$category->id])}}" method="post" >
+                    @if ($errors->any())
+                        <div style="color: red;">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form action="{{ route('product.update', $product->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        @method('put')
+                        @method('PUT')
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Category Name<i class="text-danger">*</i></label>
+                            <label class="col-md-3 col-form-label">Product Name<i class="text-danger">*</i></label>
                             <div class="col-md-9">
-                                <input type="text" required class="form-control" value="{{$category->category_name}}" name="category_name">
+                                <input type="text" required class="form-control" name="product_name" value="{{ old('product_name', $product->product_name) }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Product Category<i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <select required class="form-control" name="category_id">
+                                    @foreach($categories as $cat)
+                                        <option value="{{ $cat->id }}" {{ $product->category_id == $cat->id ? 'selected' : '' }}>{{ $cat->category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Price<i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <input type="number" required class="form-control" name="price" value="{{ old('price', $product->price) }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Delivery Charge<i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <input type="number" required class="form-control" name="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge) }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Image</label>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" name="image">
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image" width="100">
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Additional Images</label>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" name="additional_images[]" multiple>
+                                @if($product->additional_images)
+                                    <div>
+                                        @foreach(json_decode($product->additional_images) as $image)
+                                            <img src="{{ asset('storage/' . $image) }}" alt="Additional Image" width="100">
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Color (if any)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="color" value="{{ old('color', $product->color) }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Size (if any)</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="size" value="{{ old('size', $product->size) }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Required Advance<i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <select required class="form-control" name="required_advance">
+                                    <option value="deli" {{ $product->required_advance == 'deli' ? 'selected' : '' }}>Delivery Charge</option>
+                                    <option value="all" {{ $product->required_advance == 'all' ? 'selected' : '' }}>All price including DC</option>
+                                    <option value="price" {{ $product->required_advance == 'price' ? 'selected' : '' }}>Only price</option>
+                                    <option value="none" {{ $product->required_advance == 'none' ? 'selected' : '' }}>COD</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Scale</label>
+                            <label class="col-md-3 col-form-label">Status<i class="text-danger">*</i></label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" value="{{$category->scale}}" name="scale">
+                                <select required class="form-control" name="status">
+                                    <option value="active" {{ $product->status == 'active' ? 'selected' : '' }}>Active</option>
+                                    <option value="inactive" {{ $product->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                    <option value="out_of_stock" {{ $product->status == 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
+                                    <option value="discontinued" {{ $product->status == 'discontinued' ? 'selected' : '' }}>Discontinued</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Stock</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" name="stock" value="{{ old('stock', $product->stock) }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Product Description</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="description" rows="4">{{ old('description', $product->description) }}</textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label"></label>
                             <div class="col-md-9">
-                                <input type="submit" class="btn btn-primary">
+                                <input type="submit" class="btn btn-primary" value="Update Product">
                             </div>
                         </div>
                     </form>
@@ -33,10 +137,3 @@
         </div>
     </div>
 @endsection
-<script>
-    import FindUrl from "../../js/components/FindUrl";
-    export default {
-        components: {FindUrl}
-    }
-</script>
-
