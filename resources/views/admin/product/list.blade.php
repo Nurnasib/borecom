@@ -29,8 +29,8 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Deliver Charge</th>
-                            <th>Charge</th>
-                            <th>Deliver Charge</th>
+                            <th>Image</th>
+                            <th>Additional Images</th>
                             <th>Required Advanced</th>
                             <th>color-size</th>
                             <th>Status</th>

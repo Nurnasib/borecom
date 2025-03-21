@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{asset('/')}}assets/css/plugins/magnific-popup/magnific-popup.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{asset('/')}}assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 @endsection
 
 
@@ -94,14 +96,20 @@
                                 </div><!-- End .product-details-quantity -->
                             </div><!-- End .details-filter-row -->
 
-                            <div class="product-details-action">
-                                <a href="{{route('cart.add.product', $product->id)}}" class="btn-product btn-cart"><span>add to cart</span></a>
+                            <div class="product-details-action" style="display: flex; gap: 10px; align-items: center;">
+                                <a href="{{route('cart.add.product', $product->id)}}" class="btn btn-primary btn-shadow"
+                                   style="width: 150px; text-align: center; padding: 10px 20px; display: inline-block; text-decoration: none; background-color: green; color: white; border: none;">
+                                    <i class="fas fa-shopping-cart" style="margin-right: 5px;"></i>
+                                    <span>Add to Cart</span>
+                                </a>
 
-                                <div class="details-action-wrapper">
-                                    <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
-                                    <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a>
-                                </div><!-- End .details-action-wrapper -->
-                            </div><!-- End .product-details-action -->
+                                <a href="{{route('cart-buy_now',$product->id)}}" class="btn btn-primary btn-rounded btn-shadow"
+                                   style="width: 150px; text-align: center; padding: 10px 20px; display: inline-block; text-decoration: none; background-color: green; color: white; border: none;">
+                                    <i class="fas fa-shopping-bag text-outline-success" style="margin-right: 5px;"></i>
+                                    <span>Buy Now</span>
+                                </a>
+
+                            </div>
 
                             <div class="product-details-footer">
                                 <div class="product-cat">

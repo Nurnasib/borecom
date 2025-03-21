@@ -67,6 +67,17 @@ class ProductController extends Controller
         $product = Products::where('id', $id)->first();
         return view('product.detail',['product'=>$product]);
     }
+    public function cartBuyNowProduct($id)
+    {
+        $product = Products::find($id);
+        return view('product.checkout',['product'=>$product]);
+    }
+
+
+
+
+
+
     public function cartAddProduct($id)
     {
         $product = Products::find($id);
