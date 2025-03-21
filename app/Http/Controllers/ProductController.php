@@ -67,10 +67,12 @@ class ProductController extends Controller
         $product = Products::where('id', $id)->first();
         return view('product.detail',['product'=>$product]);
     }
-    public function cartBuyNowProduct($id)
+    public function cartBuyNowProduct(Request $request, $id)
     {
-        $product = Products::find($id);
-        return view('product.checkout',['product'=>$product]);
+        $d['product'] = Products::find($id);
+        $d['qty'] = $request->qty??1;
+        $d['size'] = $request->size??'m';
+        return view('product.checkout',$d);
     }
 
 

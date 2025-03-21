@@ -78,7 +78,7 @@
                                 <label for="size">Size:</label>
                                 <div class="select-custom">
                                     <select name="size" id="size" class="form-control">
-                                        <option value="#" selected="selected">Select a size</option>
+                                        <option value="" selected="selected">Select a size</option>
                                         <option value="s">Small</option>
                                         <option value="m">Medium</option>
                                         <option value="l">Large</option>
@@ -86,7 +86,7 @@
                                     </select>
                                 </div><!-- End .select-custom -->
 
-                                <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
+                                <a href="#" class="size-guide"><i class="icon-th-list"></i>Size Guide</a>
                             </div><!-- End .details-filter-row -->
 
                             <div class="details-filter-row details-row-size">
@@ -97,20 +97,18 @@
                             </div><!-- End .details-filter-row -->
 
                             <div class="product-details-action" style="display: flex; gap: 10px; align-items: center;">
-                                <a href="{{route('cart.add.product', $product->id)}}" class="btn btn-primary btn-shadow"
+                                <a href="#" id="addToCartBtn" class="btn btn-primary btn-shadow"
                                    style="width: 150px; text-align: center; padding: 10px 20px; display: inline-block; text-decoration: none; background-color: green; color: white; border: none;">
                                     <i class="fas fa-shopping-cart" style="margin-right: 5px;"></i>
                                     <span>Add to Cart</span>
                                 </a>
 
-                                <a href="{{route('cart-buy_now',$product->id)}}" class="btn btn-primary btn-rounded btn-shadow"
+                                <a href="#" id="buyNowBtn" class="btn btn-primary btn-rounded btn-shadow"
                                    style="width: 150px; text-align: center; padding: 10px 20px; display: inline-block; text-decoration: none; background-color: green; color: white; border: none;">
                                     <i class="fas fa-shopping-bag text-outline-success" style="margin-right: 5px;"></i>
                                     <span>Buy Now</span>
                                 </a>
-
                             </div>
-
                             <div class="product-details-footer">
                                 <div class="product-cat">
                                     <span>Category:</span>
@@ -488,5 +486,31 @@
     <script src="{{asset('/')}}assets/js/jquery.magnific-popup.min.js"></script>
     <!-- Main JS File -->
     <script src="{{asset('/')}}assets/js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sizeSelect = document.getElementById("size");
+            const qtyInput = document.getElementById("qty");
+            const addToCartBtn = document.getElementById("addToCartBtn");
+            const buyNowBtn = document.getElementById("buyNowBtn");
+
+            function updateLinks() {
+                const size = sizeSelect.value;
+                const qty = qtyInput.value;
+                if (size === "") {
+                    alert("Please select a size before proceeding.");
+                    return false;
+                }
+
+                const addToCartUrl = "{{ route('cart.add.product', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
+                const buyNowUrl = "{{ route('cart-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
+
+                addToCartBtn.href = addToCartUrl;
+                buyNowBtn.href = buyNowUrl;
+            }
+
+            addToCartBtn.addEventListener("click", updateLinks);
+            buyNowBtn.addEventListener("click", updateLinks);
+        });
+    </script>
 @endsection
 

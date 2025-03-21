@@ -96,109 +96,60 @@
 
                                         <tbody>
                                         <tr>
-                                            <td><a href="#">Beige knitted elastic runner shoes</a></td>
-                                            <td>$84.00</td>
+                                            <td><a href="#">{{$product->product_name}}</a></td>
+                                            <td>{{$product->price}}</td>
                                         </tr>
-
                                         <tr>
-                                            <td><a href="#">Blue utility pinafore denimdress</a></td>
-                                            <td>$76,00</td>
+                                            <td><a href="#">Quantity</a></td>
+                                            <td>{{$qty}}</td>
                                         </tr>
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
-                                            <td>$160.00</td>
+                                            <td>{{$product->price * $qty}}</td>
                                         </tr><!-- End .summary-subtotal -->
                                         <tr>
-                                            <td>Shipping:</td>
-                                            <td>Free shipping</td>
+                                            <td>Delivery Charge:</td>
+                                            <td>{{$product->delivery_charge}}</td>
                                         </tr>
                                         <tr class="summary-total">
                                             <td>Total:</td>
-                                            <td>$160.00</td>
+                                            <td>{{$product->price * $qty}}</td>
                                         </tr><!-- End .summary-total -->
+                                        <tr>
+                                            <td>Bkash:</td>
+                                            <td>01784033051</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 0.1px">Enter</td>
+                                            <td><input type="text" class="form-control mt-1" required name="transactionId" placeholder="#transactionId"></td>
+                                        </tr>
                                         </tbody>
                                     </table><!-- End .table table-summary -->
+
+
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+                                        <span class="btn-text">Place Order</span>
+                                        <span class="btn-hover-text">Proceed to Checkout</span>
+                                    </button>
 
                                     <div class="accordion-summary" id="accordion-payment">
                                         <div class="card">
                                             <div class="card-header" id="heading-1">
                                                 <h2 class="card-title">
                                                     <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                                                        Direct bank transfer
+                                                        Advance Delivery Charge Required
                                                     </a>
                                                 </h2>
                                             </div><!-- End .card-header -->
                                             <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
                                                 <div class="card-body">
-                                                    Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                                                    উক্ত Bkash নম্বরে ডেলিভারি চার্জ {{$product->delivery_charge}} /- পে করুন। তারপর, TransactionId প্রবেশ করে place Order এ চাপুন
                                                 </div><!-- End .card-body -->
                                             </div><!-- End .collapse -->
                                         </div><!-- End .card -->
 
-                                        <div class="card">
-                                            <div class="card-header" id="heading-2">
-                                                <h2 class="card-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-                                                        Check payments
-                                                    </a>
-                                                </h2>
-                                            </div><!-- End .card-header -->
-                                            <div id="collapse-2" class="collapse" aria-labelledby="heading-2" data-parent="#accordion-payment">
-                                                <div class="card-body">
-                                                    Ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .collapse -->
-                                        </div><!-- End .card -->
-
-                                        <div class="card">
-                                            <div class="card-header" id="heading-3">
-                                                <h2 class="card-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-                                                        Cash on delivery
-                                                    </a>
-                                                </h2>
-                                            </div><!-- End .card-header -->
-                                            <div id="collapse-3" class="collapse" aria-labelledby="heading-3" data-parent="#accordion-payment">
-                                                <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .collapse -->
-                                        </div><!-- End .card -->
-
-                                        <div class="card">
-                                            <div class="card-header" id="heading-4">
-                                                <h2 class="card-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
-                                                        PayPal <small class="float-right paypal-link">What is PayPal?</small>
-                                                    </a>
-                                                </h2>
-                                            </div><!-- End .card-header -->
-                                            <div id="collapse-4" class="collapse" aria-labelledby="heading-4" data-parent="#accordion-payment">
-                                                <div class="card-body">
-                                                    Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum.
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .collapse -->
-                                        </div><!-- End .card -->
-
-                                        <div class="card">
-                                            <div class="card-header" id="heading-5">
-                                                <h2 class="card-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
-                                                        Credit Card (Stripe)
-                                                        <img src="assets/images/payments-summary.png" alt="payments cards">
-                                                    </a>
-                                                </h2>
-                                            </div><!-- End .card-header -->
-                                            <div id="collapse-5" class="collapse" aria-labelledby="heading-5" data-parent="#accordion-payment">
-                                                <div class="card-body"> Donec nec justo eget felis facilisis fermentum.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Lorem ipsum dolor sit ame.
-                                                </div><!-- End .card-body -->
-                                            </div><!-- End .collapse -->
-                                        </div><!-- End .card -->
                                     </div><!-- End .accordion -->
 
-                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
-                                        <span class="btn-text">Place Order</span>
-                                        <span class="btn-hover-text">Proceed to Checkout</span>
-                                    </button>
                                 </div><!-- End .summary -->
                             </aside><!-- End .col-lg-3 -->
                         </div><!-- End .row -->
