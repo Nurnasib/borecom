@@ -127,9 +127,8 @@
                                     </table><!-- End .table table-summary -->
 
 
-                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
-                                        <span class="btn-text">Place Order</span>
-                                        <span class="btn-hover-text">Proceed to Checkout</span>
+                                    <button type="submit" class="btn btn-outline-success">
+                                        <span class="">Place Order</span>
                                     </button>
 
                                     <div class="accordion-summary" id="accordion-payment">
