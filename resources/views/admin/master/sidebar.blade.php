@@ -95,7 +95,7 @@
                         <li class="nav-item {{request()->is('admin/orders','admin/order/*/edit') ? 'manu-is-opening menu-open active':''}}">
                             <a href="{{route('order.index')}}" class="nav-link {{request()->is('admin/orders','admin/order/*/edit') ? 'active':''}}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Products List</p>
+                                <p>Order List</p>
                             </a>
                         </li>
                     </ul>

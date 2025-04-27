@@ -15,13 +15,20 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('product_id');
-            $table->integer('user_id');
+            $table->integer('product_id');
+            $table->integer('qty');
+            $table->integer('client_id');
             $table->string('order_code');
             $table->string('color')->nullable();
             $table->integer('pieces')->nullable();
             $table->string('weight')->nullable();
             $table->string('size')->nullable();
+            $table->string('address');
+            $table->string('city')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone');
+            $table->string('f_name')->nullable();
+            $table->string('l_name')->nullable();
             $table->enum('status', ['processing', 'cancelled', 'delivered', 'pending', 'placed'])->default('placed');
             $table->timestamps();
         });

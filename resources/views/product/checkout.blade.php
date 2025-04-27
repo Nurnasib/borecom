@@ -46,39 +46,40 @@
                             <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
                         </form>
                     </div><!-- End .checkout-discount -->
-                    <form action="#">
+                    <form action="{{route('place.order')}}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-9">
                                 <h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>First Name *</label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" name="f_name" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>Last Name *</label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" name="l_name" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
                                 <label>Address *</label>
-                                <textarea type="text" class="form-control" placeholder="House number and Street name" required></textarea>
+                                <textarea type="text" name="address" class="form-control" placeholder="House number and Street name" required></textarea>
 
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>City *</label>
-                                        <input type="text" class="form-control" required>
+                                        <input type="text" name="city" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
                                         <label>Phone *</label>
-                                        <input type="tel" class="form-control" required>
+                                        <input type="text" name="phone" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
                                 <label>Email address *</label>
-                                <input type="email" class="form-control" required>
+                                <input type="email" name="email" class="form-control" required>
 
 
                             </div><!-- End .col-lg-9 -->
@@ -103,6 +104,12 @@
                                             <td><a href="#">Quantity</a></td>
                                             <td>{{$qty}}</td>
                                         </tr>
+                                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                                        <input type="hidden" name="price" value="{{$product->price}}">
+                                        <input type="hidden" name="qty" value="{{$qty}}">
+                                        <input type="hidden" name="size" value="{{$size}}">
+                                        <input type="hidden" name="delivery_charge" value="{{$product->delivery_charge}}">
+
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
                                             <td>{{$product->price * $qty}}</td>
@@ -113,7 +120,7 @@
                                         </tr>
                                         <tr class="summary-total">
                                             <td>Total:</td>
-                                            <td>{{$product->price * $qty}}</td>
+                                            <td>{{$product->price * $qty +$product->delivery_charge}}</td>
                                         </tr><!-- End .summary-total -->
                                         <tr>
                                             <td>Bkash:</td>

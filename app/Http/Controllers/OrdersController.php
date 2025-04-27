@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Clients;
 use App\Models\Orders;
-use App\Models\Products;
+use App\Models\Payments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Orders::all();
+        $orders = Orders::with('payment')->get();
         return view('admin.order.list',['orders'=>$orders]);
     }
     public function create()
@@ -22,26 +24,55 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'product_name' => 'required|string|max:255',
-            'category_id' => 'required|string|max:255',
-            'price' => 'required|integer',
-            'delivery_charge' => 'required|integer|max:255',
-            'required_advance' => 'required|string|max:255',
-            'color' => 'nullable|string|max:255',
-            'size' => 'nullable|string|max:255',
-            'status' => 'required|string|max:255'
+            'product_id' => 'required|integer',
+            'qty' => 'required|integer',
+            'address' => 'required|string',
+            'phone' => 'required|string'
         ]);
-        $category = Category::where('id',$validatedData['category_id'])->first();
-        $validatedData['category_name'] = $category->category_name;
-        $validatedData['created_by'] = auth()->user()->id;
 
         try {
-            Products::create($validatedData);
-        }catch (\Exception $exception){
-            return $exception->getMessage();
+            DB::beginTransaction();
+
+            $c['email'] = $request->email;
+            $c['phone'] = $request->phone;
+            $c['firstName'] = $request->f_name;
+            $c['lastName'] = $request->l_name;
+
+            $client = Clients::create($c);
+
+            $validatedData['client_id'] = $client->id;
+            $validatedData['order_code'] = 'AD' . rand(11111, 99999);
+            $validatedData['color'] = $request->color;
+            $validatedData['pieces'] = $request->pieces;
+            $validatedData['weight'] = $request->weight;
+            $validatedData['size'] = $request->size;
+            $validatedData['address'] = $request->address;
+            $validatedData['city'] = $request->city;
+            $validatedData['email'] = $request->email;
+            $validatedData['phone'] = $request->phone;
+            $validatedData['f_name'] = $request->f_name;
+            $validatedData['l_name'] = $request->l_name;
+
+            $order = Orders::create($validatedData);
+
+            $p['order_id'] = $order->id;
+            $p['client_id'] = $client->id;
+            $p['transactionId'] = $request->transactionId;
+            $p['price'] = $request->price;
+            $p['delivery_charge'] = $request->delivery_charge;
+            $p['grand_total'] = $request->price * $request->qty;
+
+            Payments::create($p);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'Order created successfully!');
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong: ' . $exception->getMessage());
         }
 
-        return redirect('admin/product')->with('success', 'Product created successfully!');
     }
 
     /**

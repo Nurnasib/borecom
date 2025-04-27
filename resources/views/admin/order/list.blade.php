@@ -36,15 +36,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $val)
+                        @foreach($orders as $val)
                             <tr>
                                 <td>{{ $val->id }}</td>
-                                <td>{{ $val->product_name }}</td>
-                                <td>{{ $val->category_name }}</td>
-                                <td>{{ $val->price }}</td>
+                                <td>{{ $val->product_id }}</td>
+                                <td>{{ $val->client_id }}</td>
+                                <td>{{ $val->payment->price }}</td>
+                                <td>{{ $val->payment->transactionId }}</td>
                                 <td>{{ $val->delivery_charge }}</td>
-                                <td>{{ $val->required_advance }}</td>
-                                <td>{{ $val->color }}-{{ $val->size }}</td>
+                                <td>{{ $val->qty??'n/a' }}</td>
                                 <td>{{ $val->status }}</td>
                                 <td class="text-center">
                                     <!-- Edit and Delete buttons -->

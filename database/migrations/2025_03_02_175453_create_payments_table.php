@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->string('order_id');
             $table->string('transactionId')->nullable();
-            $table->integer('user_id');
+            $table->integer('client_id');
             $table->bigInteger('price')->default(0);
             $table->bigInteger('delivery_charge')->default(0);
             $table->integer('paid')->default(0);
