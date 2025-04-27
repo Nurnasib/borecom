@@ -55,6 +55,8 @@ Route::group(['prefix'=> 'admin','name'=>'Admin_Login'], function () {
     Route::get('/', [AdminController::class,'successlogin']);
     Route::post('main/logout', [AdminController::class,'logout'])->name('logout');
     Route::get('/download-db', [AdminController::class,'downloadDb'])->name('download-db');
+
+
 });
 Route::group(['name'=>'Category','middleware' => 'web',], function () {
     Route::get('/add-category', [CategoryController::class,'addCategory'])->name('add.category');

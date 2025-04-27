@@ -43,7 +43,7 @@ class CategoryController extends Controller
             return $exception->getMessage();
         }
 
-        return redirect()->back()->with('success', 'Category created successfully!');
+        return redirect('admin/category')->with('success', 'Category created successfully!');
     }
 
     /**
