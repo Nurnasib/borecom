@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('order', OrdersController::class);
+    Route::put('order/{order}/status', [OrdersController::class, 'updateStatus'])->name('order.updateStatus');
     Route::resource('payment', PaymentsController::class);
 });
 Route::get('/clear', function() {

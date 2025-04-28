@@ -108,21 +108,13 @@
                                         <input type="hidden" name="price" value="{{$product->price}}">
                                         <input type="hidden" name="qty" value="{{$qty}}">
                                         <input type="hidden" name="size" value="{{$size}}">
-                                        <input type="hidden" id="delivery_charge" name="delivery_charge" value="{{$product->delivery_charge}}">
+                                        <input type="hidden" id="delivery_charge"
+                                               name="delivery_charge" value="{{$product->delivery_charge}}">
 
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
                                             <td>{{$product->price * $qty}}</td>
                                         </tr><!-- End .summary-subtotal -->
-{{--                                        <tr>--}}
-{{--                                            <td>Delivery Charge:</td>--}}
-{{--                                            <td>{{$product->delivery_charge}}</td>--}}
-{{--                                        </tr>--}}
-{{--                                        <tr class="summary-total">--}}
-{{--                                            <td>Total:</td>--}}
-{{--                                            <td>{{$product->price * $qty +$product->delivery_charge}}</td>--}}
-{{--                                        </tr><!-- End .summary-total -->--}}
-
                                         <tr>
                                             <td>Delivery Charge:</td>
                                             <td id="delivery-charge">
@@ -136,7 +128,6 @@
                                                 {{$product->price * $qty + $product->delivery_charge_out}} <!-- Initial value -->
                                             </td>
                                         </tr>
-
                                         <tr>
                                             <td>Bkash:</td>
                                             <td>01784033051</td>
@@ -147,7 +138,6 @@
                                         </tr>
                                         </tbody>
                                     </table><!-- End .table table-summary -->
-
 
                                     <button type="submit" class="btn btn-outline-success">
                                         <span class="">Place Order</span>
@@ -168,9 +158,7 @@
                                                 </div><!-- End .card-body -->
                                             </div><!-- End .collapse -->
                                         </div><!-- End .card -->
-
                                     </div><!-- End .accordion -->
-
                                 </div><!-- End .summary -->
                             </aside><!-- End .col-lg-3 -->
                         </div><!-- End .row -->
