@@ -80,7 +80,7 @@ class ProductController extends Controller
 
 
 
-    public function cartAddProduct($id)
+    public function cartAddProduct(Request $request, $id)
     {
         $product = Products::find($id);
 
@@ -88,24 +88,32 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Product not found.');
         }
 
+        $size = $request->size ?? 'm';
+        $quantity = $request->qty ?? 1;
+
         // Get cart from session or initialize an empty array
         $cart = session()->get('cart', []);
 
-        // If product exists in cart, remove it; otherwise, add it
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product removed from cart!');
+        // Generate a unique key for this product with size
+        $cartKey = $id.'_'.$size;
+
+        // If product exists in cart, update quantity; otherwise, add it
+        if (isset($cart[$cartKey])) {
+            $cart[$cartKey]['quantity'] += $quantity;
+        } else {
+            $cart[$cartKey] = [
+                'id' => $product->id,
+                'name' => $product->product_name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'quantity' => $quantity,
+                'size' => $size
+            ];
         }
-        $cart[$id] = [
-            'id' => $product->id,
-            'name' => $product->product_name,
-            'price' => $product->price,
-            'image' => $product->image,
-            'quantity' => 1
-        ];
+
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart!');
+
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
 
@@ -248,7 +256,19 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Product deleted successfully!');
     }
+    public function removeFromCart(Request $request)
+    {
+        $id = $request->input('id');
+        $cart = session()->get('cart', []);
 
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'error' => 'Product not found in cart.']);
+    }
 
 }
 

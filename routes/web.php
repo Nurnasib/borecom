@@ -25,10 +25,10 @@ use App\Http\Controllers\AdminCategoryController;
 Route::get('/', [LandingController::class,'landing'])->name('landing');
 Route::get('/product_detail/{id}', [ProductController::class,'productDetail'])->name('product.detail');
 Route::get('/cart-product-add/{id}', [ProductController::class,'cartAddProduct'])->name('cart.add.product');
-Route::get('/cart-buy_now/{id}', [ProductController::class,'cartBuyNowProduct'])->name('cart-buy_now');
+Route::post('/cart-buy_now/{id}', [ProductController::class,'cartBuyNowProduct'])->name('cart-buy_now');
 Route::post('/place-order', [OrdersController::class,'store'])->name('place.order');
 Route::get('/cart', function () {
-    return view('Landing.cart');
+    return 'hhh';
 //    return view('admin.auth.login');
 });
 Route::prefix('admin')->group(function () {
@@ -79,3 +79,12 @@ Route::group(['name'=>'Users','middleware' => 'web',], function () {
 Route::view('forgot-pass', 'reset-pass')->name('password.reset');
 
 
+// Cart routes
+Route::get('/cart', [ProductController::class, 'viewCart'])->name('cart.view');
+Route::get('/cart/remove/{key}', [ProductController::class, 'cartRemoveProduct'])->name('cart.remove');
+Route::get('/cart/update/{key}', [ProductController::class, 'cartUpdateProduct'])->name('cart.update');
+
+// Checkout routes
+Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
+Route::post('/place-order', [ProductController::class, 'placeOrder'])->name('place.order');
+Route::get('/order-confirmation/{id}', [ProductController::class, 'orderConfirmation'])->name('order.confirmation');

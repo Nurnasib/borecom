@@ -301,31 +301,56 @@
     <script src="{{asset('/')}}assets/js/jquery.magnific-popup.min.js"></script>
     <!-- Main JS File -->
     <script src="{{asset('/')}}assets/js/main.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sizeSelect = document.getElementById("size");
-            const qtyInput = document.getElementById("qty");
-            const addToCartBtn = document.getElementById("addToCartBtn");
-            const buyNowBtn = document.getElementById("buyNowBtn");
 
-            function updateLinks() {
-                const size = sizeSelect.value;
-                const qty = qtyInput.value;
-                if (size === "") {
-                    alert("Please select a size before proceeding.");
-                    return false;
+
+    @section('scripts')
+        <script src="{{asset('/')}}assets/js/jquery.min.js"></script>
+        <script src="{{asset('/')}}assets/js/bootstrap.bundle.min.js"></script>
+        <script src="{{asset('/')}}assets/js/jquery.hoverIntent.min.js"></script>
+        <script src="{{asset('/')}}assets/js/jquery.waypoints.min.js"></script>
+        <script src="{{asset('/')}}assets/js/superfish.min.js"></script>
+        <script src="{{asset('/')}}assets/js/owl.carousel.min.js"></script>
+        <script src="{{asset('/')}}assets/js/jquery.magnific-popup.min.js"></script>
+        <!-- Main JS File -->
+        <script src="{{asset('/')}}assets/js/main.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sizeSelect = document.getElementById("size");
+                const qtyInput = document.getElementById("qty");
+                const addToCartBtn = document.getElementById("addToCartBtn");
+                const buyNowBtn = document.getElementById("buyNowBtn");
+
+                function updateLinks() {
+                    const size = sizeSelect.value;
+                    const qty = qtyInput.value;
+                    if (size === "") {
+                        alert("Please select a size before proceeding.");
+                        return false;
+                    }
+
+                    const addToCartUrl = "{{ route('cart.add.product', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
+                    const buyNowUrl = "{{ route('cart-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
+
+                    addToCartBtn.href = addToCartUrl;
+                    buyNowBtn.href = buyNowUrl;
+
+                    return true;
                 }
 
-                const addToCartUrl = "{{ route('cart.add.product', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
-                const buyNowUrl = "{{ route('cart-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
+                addToCartBtn.addEventListener("click", function(e) {
+                    if (updateLinks()) {
+                        // Show success message
+                        alert('Added to cart successfully!');
+                    } else {
+                        e.preventDefault();
+                    }
+                });
 
-                addToCartBtn.href = addToCartUrl;
-                buyNowBtn.href = buyNowUrl;
-            }
-
-            addToCartBtn.addEventListener("click", updateLinks);
-            buyNowBtn.addEventListener("click", updateLinks);
-        });
-    </script>
-@endsection
-
+                buyNowBtn.addEventListener("click", function(e) {
+                    if (!updateLinks()) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        </script>
+    @endsection
