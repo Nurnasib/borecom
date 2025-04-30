@@ -63,8 +63,19 @@ class ProductController extends Controller
     }
     public function productDetail($id)
     {
-        $d['product'] = Products::where('id', $id)->where('status', 'active')->first();
-        $d['related_products'] = Products::where('category_id',$d['product']->category_id)->where('status', 'active')->limit(4)->get();
+        $d['product'] = Products::where('id', $id)
+            ->where('status', 'active')
+            ->first();
+
+        if ($d['product']) {
+            $d['related_products'] = Products::where('category_id', $d['product']->category_id)
+                ->where('status', 'active')
+                ->where('id', '!=', $d['product']->id) // Optional: exclude current product
+                ->limit(4)
+                ->get();
+        } else {
+            $d['related_products'] = collect(); // empty collection
+        }
         return view('product.detail',$d);
     }
     public function cartBuyNowProduct(Request $request, $id)
