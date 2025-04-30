@@ -27,6 +27,7 @@ Route::get('/product_detail/{id}', [ProductController::class,'productDetail'])->
 Route::get('/cart-product-add/{id}', [ProductController::class,'cartAddProduct'])->name('cart.add.product');
 Route::get('/cart-buy_now/{id}', [ProductController::class,'cartBuyNowProduct'])->name('cart-buy_now');
 Route::post('/place-order', [OrdersController::class,'store'])->name('place.order');
+Route::get('/products/load-more', [LandingController::class, 'loadMore'])->name('products.load-more');
 Route::get('/cart', function () {
     return view('Landing.cart');
 //    return view('admin.auth.login');

@@ -115,180 +115,240 @@
             </div><!-- End .product-details-top -->
 
 
-            <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
+{{--            <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->--}}
 
-            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
-                 data-owl-options='{
-                            "nav": false,
-                            "dots": true,
-                            "margin": 20,
-                            "loop": false,
-                            "responsive": {
-                                "0": {
-                                    "items":1
-                                },
-                                "480": {
-                                    "items":2
-                                },
-                                "768": {
-                                    "items":3
-                                },
-                                "992": {
-                                    "items":4
-                                },
-                                "1200": {
-                                    "items":4,
-                                    "nav": true,
-                                    "dots": false
-                                }
-                            }
-                        }'>
-                <div class="product product-7 text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-new">New</span>
-                        <a href="product.html">
-                            <img src="{{asset('/')}}assets/images/products/product-4.jpg" alt="Product image" class="product-image">
-                        </a>
+{{--            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"--}}
+{{--                 data-owl-options='{--}}
+{{--                            "nav": false,--}}
+{{--                            "dots": true,--}}
+{{--                            "margin": 20,--}}
+{{--                            "loop": false,--}}
+{{--                            "responsive": {--}}
+{{--                                "0": {--}}
+{{--                                    "items":1--}}
+{{--                                },--}}
+{{--                                "480": {--}}
+{{--                                    "items":2--}}
+{{--                                },--}}
+{{--                                "768": {--}}
+{{--                                    "items":3--}}
+{{--                                },--}}
+{{--                                "992": {--}}
+{{--                                    "items":4--}}
+{{--                                },--}}
+{{--                                "1200": {--}}
+{{--                                    "items":4,--}}
+{{--                                    "nav": true,--}}
+{{--                                    "dots": false--}}
+{{--                                }--}}
+{{--                            }--}}
+{{--                        }'>--}}
+{{--                <div class="product product-7 text-center">--}}
+{{--                    <figure class="product-media">--}}
+{{--                        <span class="product-label label-new">New</span>--}}
+{{--                        <a href="product.html">--}}
+{{--                            <img src="{{asset('/')}}assets/images/products/product-4.jpg" alt="Product image" class="product-image">--}}
+{{--                        </a>--}}
 
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
+{{--                        <div class="product-action-vertical">--}}
+{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
+{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
+{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
+{{--                        </div><!-- End .product-action-vertical -->--}}
 
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+{{--                        <div class="product-action">--}}
+{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
+{{--                        </div><!-- End .product-action -->--}}
+{{--                    </figure><!-- End .product-media -->--}}
 
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Women</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Brown paperbag waist <br>pencil skirt</a></h3><!-- End .product-title -->
-                        <div class="product-price">
-                            $60.00
-                        </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
+{{--                    <div class="product-body">--}}
+{{--                        <div class="product-cat">--}}
+{{--                            <a href="#">Women</a>--}}
+{{--                        </div><!-- End .product-cat -->--}}
+{{--                        <h3 class="product-title"><a href="product.html">Brown paperbag waist <br>pencil skirt</a></h3><!-- End .product-title -->--}}
+{{--                        <div class="product-price">--}}
+{{--                            $60.00--}}
+{{--                        </div><!-- End .product-price -->--}}
+{{--                    </div><!-- End .product-body -->--}}
+{{--                </div><!-- End .product -->--}}
 
-                <div class="product product-7 text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-out">Out of Stock</span>
-                        <a href="product.html">
-                            <img src="{{asset('/')}}assets/images/products/product-6.jpg" alt="Product image" class="product-image">
-                        </a>
+{{--                <div class="product product-7 text-center">--}}
+{{--                    <figure class="product-media">--}}
+{{--                        <span class="product-label label-out">Out of Stock</span>--}}
+{{--                        <a href="product.html">--}}
+{{--                            <img src="{{asset('/')}}assets/images/products/product-6.jpg" alt="Product image" class="product-image">--}}
+{{--                        </a>--}}
 
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
+{{--                        <div class="product-action-vertical">--}}
+{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
+{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
+{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
+{{--                        </div><!-- End .product-action-vertical -->--}}
 
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+{{--                        <div class="product-action">--}}
+{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
+{{--                        </div><!-- End .product-action -->--}}
+{{--                    </figure><!-- End .product-media -->--}}
 
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Jackets</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3><!-- End .product-title -->
-                        <div class="product-price">
-                            <span class="out-price">$120.00</span>
-                        </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
+{{--                    <div class="product-body">--}}
+{{--                        <div class="product-cat">--}}
+{{--                            <a href="#">Jackets</a>--}}
+{{--                        </div><!-- End .product-cat -->--}}
+{{--                        <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3><!-- End .product-title -->--}}
+{{--                        <div class="product-price">--}}
+{{--                            <span class="out-price">$120.00</span>--}}
+{{--                        </div><!-- End .product-price -->--}}
+{{--                    </div><!-- End .product-body -->--}}
+{{--                </div><!-- End .product -->--}}
 
-                <div class="product product-7 text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-top">Top</span>
-                        <a href="product.html">
-                            <img src="{{asset('/')}}assets/images/products/product-11.jpg" alt="Product image" class="product-image">
-                        </a>
+{{--                <div class="product product-7 text-center">--}}
+{{--                    <figure class="product-media">--}}
+{{--                        <span class="product-label label-top">Top</span>--}}
+{{--                        <a href="product.html">--}}
+{{--                            <img src="{{asset('/')}}assets/images/products/product-11.jpg" alt="Product image" class="product-image">--}}
+{{--                        </a>--}}
 
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
+{{--                        <div class="product-action-vertical">--}}
+{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
+{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
+{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
+{{--                        </div><!-- End .product-action-vertical -->--}}
 
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+{{--                        <div class="product-action">--}}
+{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
+{{--                        </div><!-- End .product-action -->--}}
+{{--                    </figure><!-- End .product-media -->--}}
 
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Shoes</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3><!-- End .product-title -->
-                        <div class="product-price">
-                            $110.00
-                        </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
+{{--                    <div class="product-body">--}}
+{{--                        <div class="product-cat">--}}
+{{--                            <a href="#">Shoes</a>--}}
+{{--                        </div><!-- End .product-cat -->--}}
+{{--                        <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3><!-- End .product-title -->--}}
+{{--                        <div class="product-price">--}}
+{{--                            $110.00--}}
+{{--                        </div><!-- End .product-price -->--}}
+{{--                    </div><!-- End .product-body -->--}}
+{{--                </div><!-- End .product -->--}}
 
-                <div class="product product-7 text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="{{asset('/')}}assets/images/products/product-10.jpg" alt="Product image" class="product-image">
-                        </a>
+{{--                <div class="product product-7 text-center">--}}
+{{--                    <figure class="product-media">--}}
+{{--                        <a href="product.html">--}}
+{{--                            <img src="{{asset('/')}}assets/images/products/product-10.jpg" alt="Product image" class="product-image">--}}
+{{--                        </a>--}}
 
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
+{{--                        <div class="product-action-vertical">--}}
+{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
+{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
+{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
+{{--                        </div><!-- End .product-action-vertical -->--}}
 
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+{{--                        <div class="product-action">--}}
+{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
+{{--                        </div><!-- End .product-action -->--}}
+{{--                    </figure><!-- End .product-media -->--}}
 
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Jumpers</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3><!-- End .product-title -->
-                        <div class="product-price">
-                            $56.00
-                        </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
+{{--                    <div class="product-body">--}}
+{{--                        <div class="product-cat">--}}
+{{--                            <a href="#">Jumpers</a>--}}
+{{--                        </div><!-- End .product-cat -->--}}
+{{--                        <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3><!-- End .product-title -->--}}
+{{--                        <div class="product-price">--}}
+{{--                            $56.00--}}
+{{--                        </div><!-- End .product-price -->--}}
+{{--                    </div><!-- End .product-body -->--}}
+{{--                </div><!-- End .product -->--}}
 
-                <div class="product product-7 text-center">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="{{asset('/')}}assets/images/products/product-7.jpg" alt="Product image" class="product-image">
-                        </a>
+{{--                <div class="product product-7 text-center">--}}
+{{--                    <figure class="product-media">--}}
+{{--                        <a href="product.html">--}}
+{{--                            <img src="{{asset('/')}}assets/images/products/product-7.jpg" alt="Product image" class="product-image">--}}
+{{--                        </a>--}}
 
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div><!-- End .product-action-vertical -->
+{{--                        <div class="product-action-vertical">--}}
+{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
+{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
+{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
+{{--                        </div><!-- End .product-action-vertical -->--}}
 
-                        <div class="product-action">
-                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                        </div><!-- End .product-action -->
-                    </figure><!-- End .product-media -->
+{{--                        <div class="product-action">--}}
+{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
+{{--                        </div><!-- End .product-action -->--}}
+{{--                    </figure><!-- End .product-media -->--}}
 
-                    <div class="product-body">
-                        <div class="product-cat">
-                            <a href="#">Jeans</a>
-                        </div><!-- End .product-cat -->
-                        <h3 class="product-title"><a href="product.html">Blue utility pinafore denim dress</a></h3><!-- End .product-title -->
-                        <div class="product-price">
-                            $76.00
-                        </div><!-- End .product-price -->
-                    </div><!-- End .product-body -->
-                </div><!-- End .product -->
-            </div><!-- End .owl-carousel -->
-        </div><!-- End .container -->
-    </div><!-- End .page-content -->
+{{--                    <div class="product-body">--}}
+{{--                        <div class="product-cat">--}}
+{{--                            <a href="#">Jeans</a>--}}
+{{--                        </div><!-- End .product-cat -->--}}
+{{--                        <h3 class="product-title"><a href="product.html">Blue utility pinafore denim dress</a></h3><!-- End .product-title -->--}}
+{{--                        <div class="product-price">--}}
+{{--                            $76.00--}}
+{{--                        </div><!-- End .product-price -->--}}
+{{--                    </div><!-- End .product-body -->--}}
+{{--                </div><!-- End .product -->--}}
+{{--            </div><!-- End .owl-carousel -->--}}
+{{--        </div><!-- End .container -->--}}
+{{--    </div><!-- End .page-content -->--}}
+
+
+
+            <h2 class="title text-center mb-4">You May Also Like</h2>
+
+            @if($related_products->count())
+                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+                     data-owl-options='{
+                    "nav": false,
+                    "dots": true,
+                    "margin": 20,
+                    "loop": false,
+                    "responsive": {
+                        "0": {"items":1},
+                        "480": {"items":2},
+                        "768": {"items":3},
+                        "992": {"items":4},
+                        "1200": {"items":4, "nav": true, "dots": false}
+                    }
+                }'>
+                    @foreach($related_products as $rel)
+                        <div class="product product-7 text-center">
+                            <figure class="product-media">
+                                <a href="{{ route('product.detail', $rel->id) }}">
+{{--                                    <img src="{{ asset('storage/' . $rel->image) }}" alt="{{ $rel->product_name }}" class="product-image">--}}
+                                    <img src="{{ asset('storage/' . $rel->image) }}" alt="{{ $rel->product_name }}" class="product-image" style="height: 175px; object-fit: cover;">
+
+                                </a>
+
+                                <div class="product-action-vertical">
+                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                    <a href="#" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                </div>
+
+                                <div class="product-action">
+                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                </div>
+                            </figure>
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a href="#">{{ $rel->category->name ?? 'Uncategorized' }}</a>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="{{ route('product.detail', $rel->id) }}">{{ $rel->product_name }}</a>
+                                </h3>
+                                <div class="product-price">
+                                    {{ $rel->price }} tk
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <p class="text-center">No related products found.</p>
+            @endif
+        </div>
+    </div>
 @endsection
+
 
 
 @section('scripts')

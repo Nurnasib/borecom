@@ -24,6 +24,7 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'category_id' => 'required|string|max:255',
             'price' => 'required|integer',
+            'purchase_price' => 'required|integer',
             'required_advance' => 'required|string|max:255',
             'color' => 'nullable|string|max:255',
             'size' => 'nullable|string|max:255',
@@ -63,7 +64,7 @@ class ProductController extends Controller
     }
     public function productDetail($id)
     {
-        $d['product'] = Products::where('id', $id)
+        $d['product'] = Products::with('category')->where('id', $id)
             ->where('status', 'active')
             ->first();
 
@@ -85,11 +86,6 @@ class ProductController extends Controller
         $d['size'] = $request->size??'m';
         return view('product.checkout',$d);
     }
-
-
-
-
-
 
     public function cartAddProduct($id)
     {
@@ -127,46 +123,7 @@ class ProductController extends Controller
         return view('admin.product.edit', compact('product', 'categories'));
     }
 
-//    public function update(Request $request, $id)
-//    {
-//        $validatedData = $request->validate([
-//            'product_name' => 'required|string|max:255',
-//            'category_id' => 'required|string|max:255',
-//            'price' => 'required|integer',
-//            'delivery_charge_in' => 'nullable|integer|max:255',
-//            'delivery_charge_out' => 'nullable|integer|max:255',
-//            'required_advance' => 'required|string|max:255',
-//            'color' => 'nullable|string|max:255',
-//            'size' => 'nullable|string|max:255',
-//            'status' => 'required|string|max:255',
-//            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-//            'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-//            'stock' => 'nullable|integer',
-//            'description' => 'nullable|string|max:5000', //
-//        ]);
-//
-//        $product = Products::findOrFail($id);
-//
-//        if ($request->hasFile('image')) {
-//            $imagePath = $request->file('image')->store('products_images', 'public');
-//            $validatedData['image'] = $imagePath;
-//        }
-//
-//        $additionalImages = $product->additional_images ? json_decode($product->additional_images, true) : [];
-//        if ($request->hasFile('additional_images')) {
-//            foreach ($request->file('additional_images') as $image) {
-//                $additionalImages[] = $image->store('products_images', 'public');
-//            }
-//        }
-//        $validatedData['additional_images'] = json_encode($additionalImages);
-//
-//        $category = Category::find($validatedData['category_id']);
-//        $validatedData['category_name'] = $category ? $category->category_name : $product->category_name;
-//
-//        $product->update($validatedData);
-//
-//        return redirect('admin/product')->with('success', 'Product updated successfully!');
-//    }
+
 
 
     public function update(Request $request, $id)
@@ -175,6 +132,7 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'category_id' => 'required|string|max:255',
             'price' => 'required|integer',
+            'purchase_price' => 'required|integer',
             'delivery_charge_in' => 'nullable|integer|max:255',
             'delivery_charge_out' => 'nullable|integer|max:255',
             'required_advance' => 'required|string|max:255',
