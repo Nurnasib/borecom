@@ -44,11 +44,33 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Delivery Charge<i class="text-danger">*</i></label>
+                            <label class="col-md-3 col-form-label">
+                                Delivery Charge Inside Dhaka <i class="text-danger"></i>
+                            </label>
                             <div class="col-md-9">
-                                <input type="number" required class="form-control" name="delivery_charge" value="{{ old('delivery_charge', $product->delivery_charge) }}">
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="delivery_charge_in"
+                                    value="{{ old('delivery_charge_in', $product->delivery_charge_in ) }}"
+                                >
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">
+                                Delivery Charge Outside Dhaka <i class="text-danger"></i>
+                            </label>
+                            <div class="col-md-9">
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="delivery_charge_out"
+                                    value="{{ old('delivery_charge_out', $product->delivery_charge_out ) }}"
+                                >
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Image</label>
@@ -60,18 +82,34 @@
                             </div>
                         </div>
 
+{{--                        <div class="form-group row">--}}
+{{--                            <label class="col-md-3 col-form-label">Additional Images</label>--}}
+{{--                            <div class="col-md-9">--}}
+{{--                                <input type="file" class="form-control" name="additional_images[]" multiple>--}}
+{{--                                @if($product->additional_images)--}}
+{{--                                    <div>--}}
+{{--                                        @foreach(json_decode($product->additional_images) as $image)--}}
+{{--                                            <img src="{{ asset('storage/' . $image) }}" alt="Additional Image" width="100">--}}
+{{--                                        @endforeach--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Additional Images</label>
-                            <div class="col-md-9">
-                                <input type="file" class="form-control" name="additional_images[]" multiple>
-                                @if($product->additional_images)
-                                    <div>
-                                        @foreach(json_decode($product->additional_images) as $image)
-                                            <img src="{{ asset('storage/' . $image) }}" alt="Additional Image" width="100">
-                                        @endforeach
-                                    </div>
+                            <label>Existing Additional Images:</label><br>
+                              <div class="col-md-9">
+                                  <input type="file" class="form-control" name="additional_images[]" multiple>
+                                 @if($product->additional_images)
+                                    @foreach(json_decode($product->additional_images, true) as $key => $image)
+                                       <div style="display:inline-block; margin:10px; position:relative;">
+                                            <img src="{{ asset('storage/'.$image) }}" width="100" height="100" style="object-fit:cover;">
+                                            <input type="checkbox" name="remove_additional_images[]" value="{{ $image }}" style="position:absolute; top:0; left:0;">
+                                            <small style="display:block; text-align:center;">Remove</small>
+                                       </div>
+                                    @endforeach
                                 @endif
-                            </div>
+                              </div>
                         </div>
 
                         <div class="form-group row">

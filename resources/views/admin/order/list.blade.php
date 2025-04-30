@@ -18,6 +18,9 @@
                 <a class="float-right btn bg-gradient-teal btn-sm mb-3" href="{{ route('product.create') }}">
                     <i class="fa fa-plus text-light"></i>
                 </a>
+                    @foreach($errors->any as $err)
+                        {{$err}}
+                    @endforeach
 
                 <!-- Table -->
                 <div class="table-responsive">
@@ -26,11 +29,13 @@
                         <tr>
                             <th>#</th>
                             <th>Product Name</th>
-                            <th>Category</th>
+                            <th>Customer Name</th>
                             <th>Price</th>
-                            <th>Deliver Charge</th>
-                            <th>Required Advanced</th>
-                            <th>color-size</th>
+                            <th>Transaction ID</th>
+                            <th>Delivery Charge</th>
+                            <th>Quantity</th>
+                            <th>City</th>
+                            <th>Address</th>
                             <th>Status</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -38,30 +43,60 @@
                         <tbody>
                         @foreach($orders as $val)
                             <tr>
-                                <td>{{ $val->id }}</td>
-                                <td>{{ $val->product_id }}</td>
-                                <td>{{ $val->client_id }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $val->product->product_name ?? 'N/A' }}</td>
+                                <td>{{ $val->f_name ?? 'N/A' }}</td>
                                 <td>{{ $val->payment->price }}</td>
                                 <td>{{ $val->payment->transactionId }}</td>
-                                <td>{{ $val->delivery_charge }}</td>
+                                <td>{{ $val->city=='dhaka'?$val->product->delivery_charge_in:$val->product->delivery_charge_out }}</td>
                                 <td>{{ $val->qty??'n/a' }}</td>
-                                <td>{{ $val->status }}</td>
+                                <td>{{ $val->city??'n/a' }}</td>
+                                <td>{{ $val->address??'n/a' }}</td>
+                                <td>
+                                    <form action="{{ route('order.updateStatus', ['order' => $val->id]) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('PUT')
+                                        <div style="position: relative; width: 160px;">
+                                            <select name="status"
+                                                    class="form-control form-control-sm @error('status') is-invalid @enderror"
+                                                    style="
+                                                            font-size: 14px;
+                                                            padding: 6px 30px 6px 10px;
+                                                            height: 36px;
+                                                            width: 100%;
+                                                            border-radius: 6px;
+                                                            background-color: #f9f9f9;
+                                                            text-align-last: center;
+                                                            cursor: pointer;
+                                                            appearance: none;
+                                                            -webkit-appearance: none;
+                                                            -moz-appearance: none;
+                                                            background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23666%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22/></svg>');
+                                                            background-repeat: no-repeat;
+                                                            background-position: right 10px center;
+                                                            background-size: 16px 16px;
+                                                            transition: all 0.3s ease;"
+                                                            onchange="this.form.submit()"
+                                                            required>
+                                                <option value="processing" {{ $val->status == 'processing' ? 'selected' : '' }}>Processing</option>
+                                                <option value="cancelled" {{ $val->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                                <option value="delivered" {{ $val->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                                <option value="pending" {{ $val->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                <option value="placed" {{ $val->status == 'placed' ? 'selected' : '' }}>Placed</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </td>
                                 <td class="text-center">
                                     <!-- Edit and Delete buttons -->
-                                    <a href="{{ route('product.edit', ['product' => $val->id]) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('order.edit', ['order' => $val->id]) }}" class="btn btn-info btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('product.destroy', ['product' => $val->id]) }}" class="btn btn-danger btn-sm mx-2" onclick="return confirm('Are you sure you want to delete this product?');">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-
-{{--                                    <form action="{{route('product.destroy',['product' => $val->id])}}" method="POST" style="display: inline-block;">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <button type="submit" class="btn btn-danger btn-rounded" style="min-width: 10px!important;" onclick="return confirm('Are you sure you want to delete this product?');">--}}
-{{--                                            <i class="fas fa-trash-alt"></i>--}}
-{{--                                        </button>--}}
-{{--                                    </form>--}}
+                                    <form action="{{ route('order.destroy', ['order' => $val->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

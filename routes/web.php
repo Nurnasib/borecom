@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
     Route::resource('order', OrdersController::class);
+    Route::put('order/{order}/status', [OrdersController::class, 'updateStatus'])->name('order.updateStatus');
     Route::resource('payment', PaymentsController::class);
 });
 Route::get('/clear', function() {
@@ -55,6 +56,8 @@ Route::group(['prefix'=> 'admin','name'=>'Admin_Login'], function () {
     Route::get('/', [AdminController::class,'successlogin']);
     Route::post('main/logout', [AdminController::class,'logout'])->name('logout');
     Route::get('/download-db', [AdminController::class,'downloadDb'])->name('download-db');
+
+
 });
 Route::group(['name'=>'Category','middleware' => 'web',], function () {
     Route::get('/add-category', [CategoryController::class,'addCategory'])->name('add.category');

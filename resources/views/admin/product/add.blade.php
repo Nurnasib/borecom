@@ -26,6 +26,7 @@
                             <label class="col-md-3 col-form-label">Product Category<i class="text-danger">*</i></label>
                             <div class="col-md-9">
                                 <select required class="form-control" name="category_id">
+                                    <option value="">Select</option>
                                     @foreach($categories as $cat)
                                         <option value="{{$cat->id}}">{{$cat->category_name}}</option>
                                     @endforeach
@@ -39,9 +40,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 col-form-label">Delivery Charge<i class="text-danger">*</i></label>
+                            <label class="col-md-3 col-form-label">Delivery Charge Inside Dhaka<i class="text-danger"></i></label>
                             <div class="col-md-9">
-                                <input type="number" required class="form-control" name="delivery_charge">
+                                <input type="number"  class="form-control" name="delivery_charge_in">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Delivery Charge Outside  Dhaka <i class="text-danger"></i></label>
+                            <div class="col-md-9">
+                                <input type="number"  class="form-control" name="delivery_charge_out">
                             </div>
                         </div>
                         <div class="form-group row">

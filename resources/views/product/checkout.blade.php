@@ -69,7 +69,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label>City *</label>
-                                        <input type="text" name="city" class="form-control" required>
+                                        <input type="text" id="city" name="city" class="form-control" required>
                                     </div><!-- End .col-sm-6 -->
 
                                     <div class="col-sm-6">
@@ -108,7 +108,8 @@
                                         <input type="hidden" name="price" value="{{$product->price}}">
                                         <input type="hidden" name="qty" value="{{$qty}}">
                                         <input type="hidden" name="size" value="{{$size}}">
-                                        <input type="hidden" name="delivery_charge" value="{{$product->delivery_charge}}">
+                                        <input type="hidden" id="delivery_charge"
+                                               name="delivery_charge" value="{{$product->delivery_charge}}">
 
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
@@ -116,12 +117,17 @@
                                         </tr><!-- End .summary-subtotal -->
                                         <tr>
                                             <td>Delivery Charge:</td>
-                                            <td>{{$product->delivery_charge}}</td>
+                                            <td id="delivery-charge">
+                                                {{$product->delivery_charge_out}} <!-- Initial value, assuming outside Dhaka -->
+                                            </td>
                                         </tr>
+
                                         <tr class="summary-total">
                                             <td>Total:</td>
-                                            <td>{{$product->price * $qty +$product->delivery_charge}}</td>
-                                        </tr><!-- End .summary-total -->
+                                            <td id="total">
+                                                {{$product->price * $qty + $product->delivery_charge_out}} <!-- Initial value -->
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>Bkash:</td>
                                             <td>01784033051</td>
@@ -132,7 +138,6 @@
                                         </tr>
                                         </tbody>
                                     </table><!-- End .table table-summary -->
-
 
                                     <button type="submit" class="btn btn-outline-success">
                                         <span class="">Place Order</span>
@@ -153,9 +158,7 @@
                                                 </div><!-- End .card-body -->
                                             </div><!-- End .collapse -->
                                         </div><!-- End .card -->
-
                                     </div><!-- End .accordion -->
-
                                 </div><!-- End .summary -->
                             </aside><!-- End .col-lg-3 -->
                         </div><!-- End .row -->
@@ -177,6 +180,38 @@
     <script src="{{asset('/')}}assets/js/jquery.magnific-popup.min.js"></script>
     <!-- Main JS File -->
     <script src="{{asset('/')}}assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cityInput = document.getElementById('city');
+            const deliveryChargeElement = document.getElementById('delivery-charge');
+            const totalElement = document.getElementById('total');
+            const hiddenDeliveryChargeInput = document.getElementById('delivery_charge'); // Hidden delivery charge input
+
+
+            // Function to update delivery charge and total based on city
+            function updateDeliveryInfo() {
+                console.log('kkkkkk');
+                const city = cityInput.value.trim().toLowerCase();  // Get and normalize city input
+
+                if (city === 'dhaka') {
+                    console.log(city)
+                    // Update for Dhaka (you can get these values directly from the controller)
+                    deliveryChargeElement.textContent = '{{ $product->delivery_charge_in }}'; // Inside Dhaka charge
+                    totalElement.textContent = '{{ $product->price * $qty + $product->delivery_charge_in }}'; // Total for Dhaka
+                    hiddenDeliveryChargeInput.value = '{{ $product->delivery_charge_in }}';
+                } else {
+                    // Update for outside Dhaka
+                    deliveryChargeElement.textContent = '{{ $product->delivery_charge_out }}'; // Outside Dhaka charge
+                    totalElement.textContent = '{{ $product->price * $qty + $product->delivery_charge_out }}'; // Total for outside Dhaka
+                    hiddenDeliveryChargeInput.value = '{{ $product->delivery_charge_out }}';
+                }
+            }
+
+            // Attach the update function to the input event of the city field
+            cityInput.addEventListener('input', updateDeliveryInfo);
+        });
+    </script>
+
 @endsection
 
 

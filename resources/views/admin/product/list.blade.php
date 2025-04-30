@@ -26,7 +26,7 @@
                         <tr>
                             <th>#</th>
                             <th>Product Name</th>
-                            <th>Category</th>
+                            <th>Category Name</th>
                             <th>Price</th>
                             <th>Deliver Charge</th>
                             <th>Image</th>
@@ -40,11 +40,14 @@
                         <tbody>
                         @foreach($products as $val)
                             <tr>
-                                <td>{{ $val->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $val->product_name }}</td>
                                 <td>{{ $val->category_name }}</td>
                                 <td>{{ $val->price }}</td>
-                                <td>{{ $val->delivery_charge }}</td>
+                                <td>
+                                    Dhaka -{{ $val->delivery_charge_in }}<br>
+                                    Country -{{ $val->delivery_charge_out }}
+                                </td>
                                 <td>
                                     @if(isset($val->image))
                                     <img src="{{ asset('storage/' . $val->image) }}" alt="Main Image" width="40">
@@ -65,17 +68,11 @@
                                     <a href="{{ route('product.edit', ['product' => $val->id]) }}" class="btn btn-info btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('product.destroy', ['product' => $val->id]) }}" class="btn btn-danger btn-sm mx-2" onclick="return confirm('Are you sure you want to delete this product?');">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-
-{{--                                    <form action="{{route('product.destroy',['product' => $val->id])}}" method="POST" style="display: inline-block;">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <button type="submit" class="btn btn-danger btn-rounded" style="min-width: 10px!important;" onclick="return confirm('Are you sure you want to delete this product?');">--}}
-{{--                                            <i class="fas fa-trash-alt"></i>--}}
-{{--                                        </button>--}}
-{{--                                    </form>--}}
+                                    <form action="{{ route('product.destroy', $val->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

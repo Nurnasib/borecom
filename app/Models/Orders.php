@@ -28,5 +28,14 @@ class Orders extends Model
     public function payment() {
         return $this->hasOne(Payments::class, 'order_id');
     }
+    public function product()
+    {
+        return $this->hasOne(Products::class, 'id', 'product_id')
+            ->select('id', 'product_name', 'delivery_charge_in', 'delivery_charge_out');
+    }
 
+    public function client()
+    {
+        return $this->belongsTo(Clients::class, 'client_id', 'id');
+    }
 }

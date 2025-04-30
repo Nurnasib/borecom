@@ -33,7 +33,7 @@
                         <tbody>
                         @foreach($categories->unique('category_name') as $cat)
                             <tr>
-                                <td>{{ $cat->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $cat->category_name }}</td>
                                 <td>{{ $cat->scale }}</td>
                                 <td class="text-center">
