@@ -69,10 +69,33 @@ class ProductController extends Controller
     }
     public function cartBuyNowProduct(Request $request, $id)
     {
-        $d['product'] = Products::find($id);
-        $d['qty'] = $request->qty??1;
-        $d['size'] = $request->size??'m';
-        return view('product.checkout',$d);
+        $d = [];
+        $subtotal = 0;
+        if ($id==11111111){
+            $cart = $request->cart;
+
+            foreach ($cart as $value) {
+                $subtotal += $value['price'] * $value['quantity'];
+                $d[] = [
+                    'product' => Products::find($value['product_id']) ?? null,
+                    'price' => $value['price'] ?? 1,
+                    'qty' => $value['quantity'] ?? 1,
+                    'size' => $value['size'] ?? 'm',
+                ];
+            }
+        }else{
+            $subtotal += $request->price * $request->qty;
+            $d[] = [
+                'product' => Products::find($id),
+                'price' => $request->price??1,
+                'qty' => $request->qty??1,
+                'size' => $request->size??'m'
+            ];
+        }
+
+        session(['products' => $d, 'subtotal' => $subtotal]);
+        return response()->json(['redirect' => '/checkout']);
+//        return view('product.checkout',['products1'=>$d]);
     }
 
 

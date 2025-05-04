@@ -68,7 +68,8 @@
                                                     </a>
                                                 </figure>
                                                 <h3 class="product-title">
-                                                    <a href="#">{{ $item['name'] }}</a>
+                                                    <input class="product_id" type="hidden" value="{{ $item['id'] }}">
+                                                    <p id="" href="#">{{ $item['name'] }}</p>
                                                 </h3>
                                                 @if(isset($item['size']))
                                                     <p id="size">Size: {{ strtoupper($item['size']) }}</p>
@@ -244,6 +245,7 @@
                     id: row.dataset.id,
                     price: parseFloat(row.dataset.price),
                     size: parseInt(row.querySelector('.size')) || 1,
+                    product_id: row.querySelector('.product_id')?.value || 1,
                     quantity: parseInt(row.querySelector('.quantity-input').value) || 1
                 };
                 cartData.push(product);
@@ -256,8 +258,8 @@
         function sendCartDataToRoute() {
             const cartItems = collectCartData();
 
-            fetch("{{ route('cart-buy_now', 1) }}", {
-                method: 'GET',
+            fetch("{{ route('cart-buy_now', 11111111) }}", {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -266,11 +268,14 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);
-                    // Show a message or update UI as needed
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    } else {
+                        console.log('Unexpected response', data);
+                    }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.log('Error:', error);
                 });
         }
     </script>

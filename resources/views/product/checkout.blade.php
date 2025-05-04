@@ -91,43 +91,49 @@
                                         <thead>
                                         <tr>
                                             <th>Product</th>
+                                            <th class="pl-5">Price*Qty</th>
                                             <th>Total</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        <tr>
-                                            <td><a href="#">{{$product->product_name}}</a></td>
-                                            <td>{{$product->price}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="#">Quantity</a></td>
-                                            <td>{{$qty}}</td>
-                                        </tr>
-                                        <input type="hidden" name="product_id" value="{{$product->id}}">
-                                        <input type="hidden" name="price" value="{{$product->price}}">
-                                        <input type="hidden" name="qty" value="{{$qty}}">
-                                        <input type="hidden" name="size" value="{{$size}}">
-                                        <input type="hidden" id="delivery_charge"
-                                               name="delivery_charge" value="{{$product->delivery_charge}}">
+
+                                        @foreach($products1 as $val)
+                                            <tr>
+                                                <td><a href="#">{{$val['product']['product_name']}}</a></td>
+                                                <td  class="pl-5">{{$val['price']}}x{{$val['qty']}}</td>
+                                                <td>{{$val['price']*$val['qty']}}</td>
+                                            </tr>
+{{--                                            <tr>--}}
+{{--                                                <td><a href="#">Quantity</a></td>--}}
+{{--                                                --}}
+{{--                                            </tr>--}}
+                                        @endforeach
+
+{{--                                        <input type="hidden" name="product_id" value="{{$product->id}}">--}}
+{{--                                        <input type="hidden" name="price" value="{{$product->price}}">--}}
+{{--                                        <input type="hidden" name="qty" value="{{$qty}}">--}}
+{{--                                        <input type="hidden" name="size" value="{{$size}}">--}}
+{{--                                        <input type="hidden" id="delivery_charge"--}}
+{{--                                               name="delivery_charge" value="{{$product->delivery_charge}}">--}}
 
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
-                                            <td>{{$product->price * $qty}}</td>
+                                            <td>{{$subtotal}}</td>
                                         </tr><!-- End .summary-subtotal -->
                                         <tr>
                                             <td>Delivery Charge:</td>
                                             <td id="delivery-charge">
-                                                {{$product->delivery_charge_out}} <!-- Initial value, assuming outside Dhaka -->
+                                                {{$products1[0]['product']['delivery_charge_out']}}
                                             </td>
                                         </tr>
 
-                                        <tr class="summary-total">
-                                            <td>Total:</td>
-                                            <td id="total">
-                                                {{$product->price * $qty + $product->delivery_charge_out}} <!-- Initial value -->
-                                            </td>
-                                        </tr>
+{{--                                        <tr class="summary-total">--}}
+{{--                                            <td>Total:</td>--}}
+{{--                                            <td id="total">--}}
+{{--                                                {{$product->price * $qty + $product->delivery_charge_out}} <!-- Initial value -->--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
                                         <tr>
                                             <td>Bkash:</td>
                                             <td>01784033051</td>
@@ -154,7 +160,7 @@
                                             </div><!-- End .card-header -->
                                             <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
                                                 <div class="card-body">
-                                                    উক্ত Bkash নম্বরে ডেলিভারি চার্জ {{$product->delivery_charge}} /- পে করুন। তারপর, TransactionId প্রবেশ করে place Order এ চাপুন
+                                                    উক্ত Bkash নম্বরে ডেলিভারি চার্জ uiui/- পে করুন। তারপর, TransactionId প্রবেশ করে place Order এ চাপুন
                                                 </div><!-- End .card-body -->
                                             </div><!-- End .collapse -->
                                         </div><!-- End .card -->
@@ -194,16 +200,14 @@
                 const city = cityInput.value.trim().toLowerCase();  // Get and normalize city input
 
                 if (city === 'dhaka') {
-                    console.log(city)
-                    // Update for Dhaka (you can get these values directly from the controller)
-                    deliveryChargeElement.textContent = '{{ $product->delivery_charge_in }}'; // Inside Dhaka charge
-                    totalElement.textContent = '{{ $product->price * $qty + $product->delivery_charge_in }}'; // Total for Dhaka
-                    hiddenDeliveryChargeInput.value = '{{ $product->delivery_charge_in }}';
+                    console.log(city);
+                    deliveryChargeElement.textContent = '{{ $products1[0]['product']['delivery_charge_in'] }}';
+                    totalElement.textContent = '{{ $products1[0]['price'] * $products1[0]['qty'] + $products1[0]['product']->delivery_charge_in }}';
+                    hiddenDeliveryChargeInput.value = '{{ $products1[0]['product']->delivery_charge_in }}';
                 } else {
-                    // Update for outside Dhaka
-                    deliveryChargeElement.textContent = '{{ $product->delivery_charge_out }}'; // Outside Dhaka charge
-                    totalElement.textContent = '{{ $product->price * $qty + $product->delivery_charge_out }}'; // Total for outside Dhaka
-                    hiddenDeliveryChargeInput.value = '{{ $product->delivery_charge_out }}';
+                    deliveryChargeElement.textContent = '{{ $products1[0]['product']->delivery_charge_out }}';
+                    totalElement.textContent = '{{ $products1[0]['price'] * $products1[0]['qty'] + $products1[0]['product']->delivery_charge_out }}';
+                    hiddenDeliveryChargeInput.value = '{{ $products1[0]['product']->delivery_charge_out }}';
                 }
             }
 
