@@ -90,5 +90,5 @@ Route::get('/cart/update/{key}', [ProductController::class, 'cartUpdateProduct']
 
 // Checkout routes
 //Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
-Route::post('/place-order', [ProductController::class, 'placeOrder'])->name('place.order');
+//Route::post('/place-order', [ProductController::class, 'placeOrder'])->name('place.order');
 Route::get('/order-confirmation/{id}', [ProductController::class, 'orderConfirmation'])->name('order.confirmation');

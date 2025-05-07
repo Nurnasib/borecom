@@ -37,7 +37,7 @@ class AdminController extends Controller
 
         if(Auth::attempt($user_data))
         {
-            return redirect('main/successlogin');
+            return redirect('admin/main/successlogin');
         }
         else
         {
