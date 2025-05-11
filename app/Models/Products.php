@@ -13,6 +13,7 @@ class Products extends Model
         'category_id',
         'category_name',
         'price',
+        'purchase_price',
         'delivery_charge_in',
         'delivery_charge_out',
         'image',
@@ -25,4 +26,8 @@ class Products extends Model
         'stock',  // Newly added
         'description',  // Newly added
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
