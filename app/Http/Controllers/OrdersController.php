@@ -26,11 +26,11 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'product_id' => 'required|integer',
-            'qty' => 'required|integer',
             'address' => 'required|string',
             'phone' => 'required|string'
         ]);
+        $products = session('products', []);
+        $subtotal = session('subtotal', 0);
 
         try {
             DB::beginTransaction();
@@ -41,28 +41,34 @@ class OrdersController extends Controller
             $c['lastName'] = $request->l_name;
 
             $client = Clients::create($c);
-
-            $validatedData['client_id'] = $client->id;
             $validatedData['order_code'] = 'AD' . rand(11111, 99999);
-            $validatedData['color'] = $request->color;
-            $validatedData['pieces'] = $request->pieces;
-            $validatedData['weight'] = $request->weight;
-            $validatedData['size'] = $request->size;
-            $validatedData['address'] = $request->address;
-            $validatedData['city'] = $request->city;
-            $validatedData['email'] = $request->email;
-            $validatedData['phone'] = $request->phone;
-            $validatedData['f_name'] = $request->f_name;
-            $validatedData['l_name'] = $request->l_name;
-
-            $order = Orders::create($validatedData);
+            $validatedData['client_id'] = $client->id;
+            foreach ($products as $product) {
+                $order = Orders::create([
+                    'product_id' => $product->product->id,
+                    'qty' => $product->qty,
+                    'order_code' => $validatedData['order_code'],
+                    'client_id' => $client->id,
+                    'color' => $request->color,
+                    'pieces' => $request->pieces,
+                    'weight' => $request->weight,
+                    'size' => $request->size,
+                    'address' => $request->address,
+                    'city' => $request->city,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'f_name' => $request->f_name,
+                    'l_name' => $request->l_name,
+                ]);
+            }
 
             $p['order_id'] = $order->id;
+            $p['order_code'] = $validatedData['order_code'];
             $p['client_id'] = $client->id;
             $p['transactionId'] = $request->transactionId;
             $p['price'] = $request->price;
             $p['delivery_charge'] = $request->delivery_charge;
-            $p['grand_total'] = $request->price * $request->qty;
+            $p['grand_total'] = $subtotal;
 
             Payments::create($p);
 
