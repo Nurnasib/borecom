@@ -45,6 +45,8 @@ class OrdersController extends Controller
             $validatedData['client_id'] = $client->id;
             foreach ($products as $product) {
                 $order = Orders::create([
+                    'product_id' => $product->product->id,
+                    'qty' => $product->qty,
                     'order_code' => $validatedData['order_code'],
                     'client_id' => $client->id,
                     'color' => $request->color,
@@ -61,12 +63,12 @@ class OrdersController extends Controller
             }
 
             $p['order_id'] = $order->id;
-            $p['order_code'] = $order->order_code;
+            $p['order_code'] = $validatedData['order_code'];
             $p['client_id'] = $client->id;
             $p['transactionId'] = $request->transactionId;
             $p['price'] = $request->price;
             $p['delivery_charge'] = $request->delivery_charge;
-            $p['grand_total'] = $request->price * $request->qty;
+            $p['grand_total'] = $subtotal;
 
             Payments::create($p);
 
