@@ -42,6 +42,12 @@
                                 <input type="number" required class="form-control" name="price" value="{{ old('price', $product->price) }}">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Purchase Price <i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <input type="number" required class="form-control" name="purchase_price" value="{{ old('purchase_price', $product->purchase_price) }}">
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">
@@ -81,20 +87,6 @@
                                 @endif
                             </div>
                         </div>
-
-{{--                        <div class="form-group row">--}}
-{{--                            <label class="col-md-3 col-form-label">Additional Images</label>--}}
-{{--                            <div class="col-md-9">--}}
-{{--                                <input type="file" class="form-control" name="additional_images[]" multiple>--}}
-{{--                                @if($product->additional_images)--}}
-{{--                                    <div>--}}
-{{--                                        @foreach(json_decode($product->additional_images) as $image)--}}
-{{--                                            <img src="{{ asset('storage/' . $image) }}" alt="Additional Image" width="100">--}}
-{{--                                        @endforeach--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
 
                         <div class="form-group row">
                             <label>Existing Additional Images:</label><br>

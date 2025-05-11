@@ -32,6 +32,7 @@ Route::get('/checkout', function () {
     return view('product.checkout', compact(['products1', 'subtotal']));
 })->name('checkout.page');
 Route::post('/place-order', [OrdersController::class,'store'])->name('place.order');
+Route::get('/products/load-more', [LandingController::class, 'loadMore'])->name('products.load-more');
 Route::get('/cart', function () {
     return view('Landing.cart');
 });

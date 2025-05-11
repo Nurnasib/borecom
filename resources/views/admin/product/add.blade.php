@@ -40,6 +40,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Purchase Price <i class="text-danger">*</i></label>
+                            <div class="col-md-9">
+                                <input type="number" required class="form-control" name="purchase_price" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label">Delivery Charge Inside Dhaka<i class="text-danger"></i></label>
                             <div class="col-md-9">
                                 <input type="number"  class="form-control" name="delivery_charge_in">

@@ -8,7 +8,23 @@ use Illuminate\Http\Request;
 class LandingController extends Controller
 {
     public function landing() {
-        $data['products'] = Products::all();
+        $data['products'] = Products::where('status', 'active')->take(4)->get();
+        $data['products_grouped'] = Products::where('status', 'active')->with('category')->get()->groupBy('category_id');
         return view('Landing.landing', $data);
+    }
+    public function loadMore(Request $request)
+    {
+        $offset = $request->offset ?? 0;
+        $limit = 4;
+
+        $products = Products::latest()->where('status', 'active')->skip($offset)->take($limit)->get();
+        $totalProducts = Products::count();
+
+        $html = view('Landing.products_card', compact('products'))->render();
+
+        return response()->json([
+            'html' => $html,
+            'hasMore' => $totalProducts > ($offset + $limit),
+        ]);
     }
 }

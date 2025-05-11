@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->integer('created_by');
             $table->bigInteger('price')->default(0);
+            $table->bigInteger('purchase_price')->default(0);
             $table->bigInteger('delivery_charge_in')->default(0);
             $table->bigInteger('delivery_charge_out')->default(0);
             $table->string('color')->nullable();
