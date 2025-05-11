@@ -26,6 +26,7 @@ Route::get('/', [LandingController::class,'landing'])->name('landing');
 Route::get('/product_detail/{id}', [ProductController::class,'productDetail'])->name('product.detail');
 Route::get('/cart-product-add/{id}', [ProductController::class,'cartAddProduct'])->name('cart.add.product');
 Route::post('/cart-buy_now/{id}', [ProductController::class,'cartBuyNowProduct'])->name('cart-buy_now');
+Route::get('/single-buy_now/{id}', [ProductController::class,'cartBuyNowProduct'])->name('single-buy_now');
 Route::get('/checkout', function () {
     $products1 = session('products', []);
     $subtotal = session('subtotal', 0);

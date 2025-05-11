@@ -30,10 +30,10 @@
                             <th>#</th>
                             <th>Product Name</th>
                             <th>Customer Name</th>
+                            <th>Quantity</th>
                             <th>Price</th>
                             <th>Transaction ID</th>
                             <th>Delivery Charge</th>
-                            <th>Quantity</th>
                             <th>City</th>
                             <th>Address</th>
                             <th>Status</th>
@@ -46,10 +46,10 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $val->product->product_name ?? 'N/A' }}</td>
                                 <td>{{ $val->f_name ?? 'N/A' }}</td>
-                                <td>{{ $val->payment->price }}</td>
-                                <td>{{ $val->payment->transactionId }}</td>
-                                <td>{{ $val->city=='dhaka'?$val->product->delivery_charge_in:$val->product->delivery_charge_out }}</td>
                                 <td>{{ $val->qty??'n/a' }}</td>
+                                <td>{{ $val->product->price*$val->qty??'none' }}</td>
+                                <td>{{ $val->payment->transactionId??'none' }}</td>
+                                <td>{{ $val->city=='dhaka'?$val->product->delivery_charge_in:$val->product->delivery_charge_out }}</td>
                                 <td>{{ $val->city??'n/a' }}</td>
                                 <td>{{ $val->address??'n/a' }}</td>
                                 <td>

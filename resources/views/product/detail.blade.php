@@ -389,7 +389,7 @@
                     }
 
                     const addToCartUrl = "{{ route('cart.add.product', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
-                    const buyNowUrl = "{{ route('cart-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
+                    const buyNowUrl = "{{ route('single-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
 
                     addToCartBtn.href = addToCartUrl;
                     buyNowBtn.href = buyNowUrl;
@@ -407,9 +407,29 @@
                 });
 
                 buyNowBtn.addEventListener("click", function(e) {
-                    if (!updateLinks()) {
-                        e.preventDefault();
-                    }
+                    const sizeSelect = document.getElementById("size");
+                    const qtyInput = document.getElementById("qty");
+                    const size = sizeSelect.value;
+                    const qty = qtyInput.value;
+
+                    fetch("{{ route('single-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.redirect) {
+                                window.location.href = data.redirect;
+                            } else {
+                                console.log('Unexpected response', data);
+                            }
+                        })
+                        .catch(error => {
+                            console.log('Error:', error);
+                        });
                 });
             });
         </script>

@@ -45,8 +45,8 @@ class OrdersController extends Controller
             $validatedData['client_id'] = $client->id;
             foreach ($products as $product) {
                 $order = Orders::create([
-                    'product_id' => $product->product->id,
-                    'qty' => $product->qty,
+                    'product_id' => $product['product']['id'],
+                    'qty' => $product['qty'],
                     'order_code' => $validatedData['order_code'],
                     'client_id' => $client->id,
                     'color' => $request->color,
@@ -61,14 +61,16 @@ class OrdersController extends Controller
                     'l_name' => $request->l_name,
                 ]);
             }
-
-            $p['order_id'] = $order->id;
             $p['order_code'] = $validatedData['order_code'];
             $p['client_id'] = $client->id;
             $p['transactionId'] = $request->transactionId;
-            $p['price'] = $request->price;
-            $p['delivery_charge'] = $request->delivery_charge;
-            $p['grand_total'] = $subtotal;
+            $p['price'] = $subtotal;
+            if ($products[0]['product']['city']!='Dhaka'||$products[0]['product']['city']!='dhaka') {
+                $p['delivery_charge'] = $products[0]['product']['delivery_charge_out'];
+            }else{
+                $p['delivery_charge'] = $products[0]['product']['delivery_charge_in'];
+            }
+            $p['grand_total'] = $subtotal+$request->delivery_charge;
 
             Payments::create($p);
 
@@ -78,7 +80,7 @@ class OrdersController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Something went wrong: ' . $exception->getMessage());
+            return $exception->getMessage();
         }
     }
 

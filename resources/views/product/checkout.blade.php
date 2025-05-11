@@ -124,7 +124,7 @@
                                         <tr>
                                             <td>Delivery Charge:</td>
                                             <td id="delivery-charge">
-                                                {{$products1[0]['product']['delivery_charge_out']}}
+                                                {{$products1[0]['product']['delivery_charge_in']}}
                                             </td>
                                         </tr>
 

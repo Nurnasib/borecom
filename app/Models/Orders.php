@@ -26,12 +26,12 @@ class Orders extends Model
         'status',
     ];
     public function payment() {
-        return $this->hasOne(Payments::class, 'order_id');
+        return $this->belongsTo(Payments::class, 'order_code', 'order_code');
     }
     public function product()
     {
         return $this->hasOne(Products::class, 'id', 'product_id')
-            ->select('id', 'product_name', 'delivery_charge_in', 'delivery_charge_out');
+            ->select('id', 'product_name', 'delivery_charge_in', 'delivery_charge_out', 'price');
     }
 
     public function client()
