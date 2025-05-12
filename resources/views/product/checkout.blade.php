@@ -139,7 +139,7 @@
                                             <td>01784033051</td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 0.1px">Enter</td>
+                                            <td style="width: 0.1px">Enter Transaction_id</td>
                                             <td><input type="text" class="form-control mt-1" required name="transactionId" placeholder="#transactionId"></td>
                                         </tr>
                                         </tbody>
@@ -160,7 +160,7 @@
                                             </div><!-- End .card-header -->
                                             <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
                                                 <div class="card-body">
-                                                    উক্ত Bkash নম্বরে ডেলিভারি চার্জ uiui/- পে করুন। তারপর, TransactionId প্রবেশ করে place Order এ চাপুন
+                                                    উক্ত Bkash নম্বরে ডেলিভারি চার্জ পে করুন। তারপর, Transaction_id প্রবেশ করে place Order এ চাপুন
                                                 </div><!-- End .card-body -->
                                             </div><!-- End .collapse -->
                                         </div><!-- End .card -->

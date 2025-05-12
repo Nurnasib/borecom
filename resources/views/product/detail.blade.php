@@ -62,7 +62,7 @@
                                 <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
                             </div><!-- End .rating-container -->
 
-                            <div class="product-price">
+                            <div class="product-price" id="product-price">
                                 {{$product->price}} tk
                             </div><!-- End .product-price -->
 
@@ -78,7 +78,6 @@
                                 <label for="size">Size:</label>
                                 <div class="select-custom">
                                     <select name="size" id="size" class="form-control">
-                                        <option value="" selected="selected">Select a size</option>
                                         <option value="s">Small</option>
                                         <option value="m">Medium</option>
                                         <option value="l">Large</option>
@@ -103,7 +102,7 @@
                                     <span>Add to Cart</span>
                                 </a>
 
-                                <a href="#" id="buyNowBtn" class="btn btn-primary btn-rounded btn-shadow"
+                                <a href="#" id="buyNowBtnnnn" class="btn btn-primary btn-rounded btn-shadow"
                                    style="width: 150px; text-align: center; padding: 10px 20px; display: inline-block; text-decoration: none; background-color: green; color: white; border: none;">
                                     <i class="fas fa-shopping-bag text-outline-success" style="margin-right: 5px;"></i>
                                     <span>Buy Now</span>
@@ -113,181 +112,6 @@
                     </div><!-- End .col-md-6 -->
                 </div><!-- End .row -->
             </div><!-- End .product-details-top -->
-
-
-{{--            <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->--}}
-
-{{--            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"--}}
-{{--                 data-owl-options='{--}}
-{{--                            "nav": false,--}}
-{{--                            "dots": true,--}}
-{{--                            "margin": 20,--}}
-{{--                            "loop": false,--}}
-{{--                            "responsive": {--}}
-{{--                                "0": {--}}
-{{--                                    "items":1--}}
-{{--                                },--}}
-{{--                                "480": {--}}
-{{--                                    "items":2--}}
-{{--                                },--}}
-{{--                                "768": {--}}
-{{--                                    "items":3--}}
-{{--                                },--}}
-{{--                                "992": {--}}
-{{--                                    "items":4--}}
-{{--                                },--}}
-{{--                                "1200": {--}}
-{{--                                    "items":4,--}}
-{{--                                    "nav": true,--}}
-{{--                                    "dots": false--}}
-{{--                                }--}}
-{{--                            }--}}
-{{--                        }'>--}}
-{{--                <div class="product product-7 text-center">--}}
-{{--                    <figure class="product-media">--}}
-{{--                        <span class="product-label label-new">New</span>--}}
-{{--                        <a href="product.html">--}}
-{{--                            <img src="{{asset('/')}}assets/images/products/product-4.jpg" alt="Product image" class="product-image">--}}
-{{--                        </a>--}}
-
-{{--                        <div class="product-action-vertical">--}}
-{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
-{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
-{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
-{{--                        </div><!-- End .product-action-vertical -->--}}
-
-{{--                        <div class="product-action">--}}
-{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
-{{--                        </div><!-- End .product-action -->--}}
-{{--                    </figure><!-- End .product-media -->--}}
-
-{{--                    <div class="product-body">--}}
-{{--                        <div class="product-cat">--}}
-{{--                            <a href="#">Women</a>--}}
-{{--                        </div><!-- End .product-cat -->--}}
-{{--                        <h3 class="product-title"><a href="product.html">Brown paperbag waist <br>pencil skirt</a></h3><!-- End .product-title -->--}}
-{{--                        <div class="product-price">--}}
-{{--                            $60.00--}}
-{{--                        </div><!-- End .product-price -->--}}
-{{--                    </div><!-- End .product-body -->--}}
-{{--                </div><!-- End .product -->--}}
-
-{{--                <div class="product product-7 text-center">--}}
-{{--                    <figure class="product-media">--}}
-{{--                        <span class="product-label label-out">Out of Stock</span>--}}
-{{--                        <a href="product.html">--}}
-{{--                            <img src="{{asset('/')}}assets/images/products/product-6.jpg" alt="Product image" class="product-image">--}}
-{{--                        </a>--}}
-
-{{--                        <div class="product-action-vertical">--}}
-{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
-{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
-{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
-{{--                        </div><!-- End .product-action-vertical -->--}}
-
-{{--                        <div class="product-action">--}}
-{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
-{{--                        </div><!-- End .product-action -->--}}
-{{--                    </figure><!-- End .product-media -->--}}
-
-{{--                    <div class="product-body">--}}
-{{--                        <div class="product-cat">--}}
-{{--                            <a href="#">Jackets</a>--}}
-{{--                        </div><!-- End .product-cat -->--}}
-{{--                        <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3><!-- End .product-title -->--}}
-{{--                        <div class="product-price">--}}
-{{--                            <span class="out-price">$120.00</span>--}}
-{{--                        </div><!-- End .product-price -->--}}
-{{--                    </div><!-- End .product-body -->--}}
-{{--                </div><!-- End .product -->--}}
-
-{{--                <div class="product product-7 text-center">--}}
-{{--                    <figure class="product-media">--}}
-{{--                        <span class="product-label label-top">Top</span>--}}
-{{--                        <a href="product.html">--}}
-{{--                            <img src="{{asset('/')}}assets/images/products/product-11.jpg" alt="Product image" class="product-image">--}}
-{{--                        </a>--}}
-
-{{--                        <div class="product-action-vertical">--}}
-{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
-{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
-{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
-{{--                        </div><!-- End .product-action-vertical -->--}}
-
-{{--                        <div class="product-action">--}}
-{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
-{{--                        </div><!-- End .product-action -->--}}
-{{--                    </figure><!-- End .product-media -->--}}
-
-{{--                    <div class="product-body">--}}
-{{--                        <div class="product-cat">--}}
-{{--                            <a href="#">Shoes</a>--}}
-{{--                        </div><!-- End .product-cat -->--}}
-{{--                        <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3><!-- End .product-title -->--}}
-{{--                        <div class="product-price">--}}
-{{--                            $110.00--}}
-{{--                        </div><!-- End .product-price -->--}}
-{{--                    </div><!-- End .product-body -->--}}
-{{--                </div><!-- End .product -->--}}
-
-{{--                <div class="product product-7 text-center">--}}
-{{--                    <figure class="product-media">--}}
-{{--                        <a href="product.html">--}}
-{{--                            <img src="{{asset('/')}}assets/images/products/product-10.jpg" alt="Product image" class="product-image">--}}
-{{--                        </a>--}}
-
-{{--                        <div class="product-action-vertical">--}}
-{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
-{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
-{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
-{{--                        </div><!-- End .product-action-vertical -->--}}
-
-{{--                        <div class="product-action">--}}
-{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
-{{--                        </div><!-- End .product-action -->--}}
-{{--                    </figure><!-- End .product-media -->--}}
-
-{{--                    <div class="product-body">--}}
-{{--                        <div class="product-cat">--}}
-{{--                            <a href="#">Jumpers</a>--}}
-{{--                        </div><!-- End .product-cat -->--}}
-{{--                        <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3><!-- End .product-title -->--}}
-{{--                        <div class="product-price">--}}
-{{--                            $56.00--}}
-{{--                        </div><!-- End .product-price -->--}}
-{{--                    </div><!-- End .product-body -->--}}
-{{--                </div><!-- End .product -->--}}
-
-{{--                <div class="product product-7 text-center">--}}
-{{--                    <figure class="product-media">--}}
-{{--                        <a href="product.html">--}}
-{{--                            <img src="{{asset('/')}}assets/images/products/product-7.jpg" alt="Product image" class="product-image">--}}
-{{--                        </a>--}}
-
-{{--                        <div class="product-action-vertical">--}}
-{{--                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>--}}
-{{--                            <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>--}}
-{{--                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>--}}
-{{--                        </div><!-- End .product-action-vertical -->--}}
-
-{{--                        <div class="product-action">--}}
-{{--                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>--}}
-{{--                        </div><!-- End .product-action -->--}}
-{{--                    </figure><!-- End .product-media -->--}}
-
-{{--                    <div class="product-body">--}}
-{{--                        <div class="product-cat">--}}
-{{--                            <a href="#">Jeans</a>--}}
-{{--                        </div><!-- End .product-cat -->--}}
-{{--                        <h3 class="product-title"><a href="product.html">Blue utility pinafore denim dress</a></h3><!-- End .product-title -->--}}
-{{--                        <div class="product-price">--}}
-{{--                            $76.00--}}
-{{--                        </div><!-- End .product-price -->--}}
-{{--                    </div><!-- End .product-body -->--}}
-{{--                </div><!-- End .product -->--}}
-{{--            </div><!-- End .owl-carousel -->--}}
-{{--        </div><!-- End .container -->--}}
-{{--    </div><!-- End .page-content -->--}}
 
 
 
@@ -389,34 +213,48 @@
                     }
 
                     const addToCartUrl = "{{ route('cart.add.product', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
-                    const buyNowUrl = "{{ route('single-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty;
-
                     addToCartBtn.href = addToCartUrl;
-                    buyNowBtn.href = buyNowUrl;
 
                     return true;
                 }
 
-                addToCartBtn.addEventListener("click", function(e) {
+                addToCartBtn.addEventListener("click", function (e) {
                     if (updateLinks()) {
-                        // Show success message
                         alert('Added to cart successfully!');
                     } else {
                         e.preventDefault();
                     }
                 });
 
-                buyNowBtn.addEventListener("click", function(e) {
-                    const sizeSelect = document.getElementById("size");
-                    const qtyInput = document.getElementById("qty");
+            });
+
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sizeSelect = document.getElementById("size");
+                const qtyInput = document.getElementById("qty");
+                const priceInput = document.getElementById("product-price");
+                const buyNowBtn = document.getElementById("buyNowBtnnnn");
+
+                buyNowBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    console.log('Buy Now Clicked');
+
                     const size = sizeSelect.value;
                     const qty = qtyInput.value;
+                    const rawText = priceInput.textContent.trim(); // e.g., "500 tk"
+                    const price = parseFloat(rawText);
+                    console.log(price, 'price')
 
-                    fetch("{{ route('single-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty, {
+                    if (size === "") {
+                        alert("Please select a size before proceeding.");
+                        return;
+                    }
+
+                    fetch("{{ route('single-buy_now', $product->id) }}?size=" + encodeURIComponent(size) + "&qty=" + qty+ "&price=" + price, {
                         method: 'GET',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            'Content-Type': 'application/json'
                         },
                     })
                         .then(response => response.json())
@@ -431,6 +269,8 @@
                             console.log('Error:', error);
                         });
                 });
+
             });
+
         </script>
     @endsection

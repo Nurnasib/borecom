@@ -76,6 +76,9 @@ class OrdersController extends Controller
 
             DB::commit();
 
+            session()->forget('products');
+            session()->forget('subtotal');
+
             return redirect()->back()->with('success', 'Order created successfully!');
 
         } catch (\Exception $exception) {
