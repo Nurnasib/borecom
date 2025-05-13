@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('stock')->nullable();
             $table->string('additional_images', 500)->nullable();
-            $table->enum('required_advance',['deli', 'all', 'price', 'none'])->default('deli');
+            $table->enum('required_advance',['deli', 'all', 'price', 'cod', 'none'])->default('deli');
             $table->enum('status', ['active', 'inactive', 'out_of_stock', 'discontinued'])->default('active');
             $table->timestamps();
         });

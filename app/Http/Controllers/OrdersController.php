@@ -223,4 +223,9 @@ class OrdersController extends Controller
         // Redirect back with a success message
         return redirect()->route('order.index')->with('message', 'Order status updated successfully!');
     }
+    public function getOrdersBySlug(Request $request)
+    {
+        $orders = Orders::where('phone', $request->slug)->orWhere('order_code', $request->slug)->with(['payment', 'product'])->get();
+        return view('Landing.orders', ['orders' => $orders]);
+    }
 }

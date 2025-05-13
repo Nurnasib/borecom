@@ -1,12 +1,13 @@
 @extends('Layouts.master')
 @section('links')
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/')}}assets/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/')}}assets/images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/')}}assets/images/icons/favicon-16x16.png">
+{{--    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/')}}assets/images/icons/apple-touch-icon.png">--}}
+{{--    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/')}}assets/images/icons/favicon-32x32.png">--}}
+{{--    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/')}}assets/images/icons/favicon-16x16.png">--}}
     <link rel="manifest" href="{{asset('/')}}assets/images/icons/site.html">
     <link rel="mask-icon" href="{{asset('/')}}assets/images/icons/safari-pinned-tab.svg" color="#666666">
-    <link rel="shortcut icon" href="{{asset('/')}}assets/images/icons/favicon.ico">
+{{--    <link rel="shortcut icon" href="{{asset('/')}}assets/images/icons/favicon.ico">--}}
     <meta name="apple-mobile-web-app-title" content="Molla">
+<link rel="icon" href="{{asset('/')}}adw.jpeg" type="image/x-icon" />
     <meta name="application-name" content="Molla">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="{{asset('/')}}assets/images/icons/browserconfig.xml">
@@ -138,29 +139,42 @@
                                             <td>Bkash:</td>
                                             <td>01784033051</td>
                                         </tr>
-                                        <tr>
-                                            <td style="width: 0.1px">Enter Transaction_id</td>
-                                            <td><input type="text" class="form-control mt-1" required name="transactionId" placeholder="#transactionId"></td>
-                                        </tr>
+{{--                                        <tr>--}}
+{{--                                            --}}
+{{--                                        </tr>--}}
                                         </tbody>
                                     </table><!-- End .table table-summary -->
+                                    <div class="col-md-10">
+                                        <label> <span class="text-danger">Enter Transaction ID</span></label>
+                                        <input type="text" class="form-control mt-1" required name="transactionId" placeholder="#transactionId">
+                                    </div>
 
                                     <button type="submit" class="btn btn-outline-success">
                                         <span class="">Place Order</span>
                                     </button>
+                                    @php
+                                    $adv_req = 'none';
+                                    if ($products1[0]['product']['required_advance']=='deli'){
+                                        $adv_req = 'delivery charge';
+                                    }elseif ($products1[0]['product']['required_advance']=='all'){
+                                        $adv_req = 'full price+delivery charge';
+                                    }elseif ($products1[0]['product']['required_advance']=='price'){
+                                        $adv_req = 'only price';
+                                    }
+                                    @endphp
 
                                     <div class="accordion-summary" id="accordion-payment">
                                         <div class="card">
                                             <div class="card-header" id="heading-1">
                                                 <h2 class="card-title">
                                                     <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                                                        Advance Delivery Charge Required
+                                                        Advance {{$adv_req}} Required
                                                     </a>
                                                 </h2>
                                             </div><!-- End .card-header -->
                                             <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
                                                 <div class="card-body">
-                                                    উক্ত Bkash নম্বরে ডেলিভারি চার্জ পে করুন। তারপর, Transaction_id প্রবেশ করে place Order এ চাপুন
+                                                    উক্ত Bkash নম্বরে পে করুন। তারপর, Transaction_id প্রবেশ করে place Order এ চাপুন
                                                 </div><!-- End .card-body -->
                                             </div><!-- End .collapse -->
                                         </div><!-- End .card -->

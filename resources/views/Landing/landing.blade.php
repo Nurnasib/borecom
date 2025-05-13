@@ -1,11 +1,12 @@
 @extends('Layouts.master')
 @section('links')
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/')}}assets/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/')}}assets/images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/')}}assets/images/icons/favicon-16x16.png">
-    <link rel="manifest" href="{{asset('/')}}assets/images/icons/site.html">
-    <link rel="mask-icon" href="{{asset('/')}}assets/images/icons/safari-pinned-tab.svg" color="#666666">
-    <link rel="shortcut icon" href="{{asset('/')}}assets/images/icons/favicon.ico">
+{{--    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/')}}assets/images/icons/apple-touch-icon.png">--}}
+{{--    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/')}}adw.jpeg">--}}
+{{--    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/')}}assets/images/icons/favicon-16x16.png">--}}
+{{--    <link rel="manifest" href="{{asset('/')}}assets/images/icons/site.html">--}}
+{{--    <link rel="mask-icon" href="{{asset('/')}}assets/images/icons/safari-pinned-tab.svg" color="#666666">--}}
+{{--    <link rel="shortcut icon" href="{{asset('/')}}assets/images/icons/favicon.ico">--}}
+
     <meta name="apple-mobile-web-app-title" content="Molla">
     <meta name="application-name" content="Molla">
     <meta name="msapplication-TileColor" content="#cc9966">
@@ -186,24 +187,24 @@
     <div class="mb-6"></div><!-- End .mb-6 -->
 
 
-    <div class="cta cta-display bg-image pt-4 pb-4" style="background-image: url({{asset('/')}}assets/images/backgrounds/cta/bg-6.jpg); margin-bottom: 30px;">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-9 col-xl-8">
-                    <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">
-                        <div class="col">
-                            <h3 class="cta-title text-white">Sign Up & Get 5% Off</h3><!-- End .cta-title -->
-                            <p class="cta-desc text-white">Amadr Dokan presents the best in product in Bangladesh </p><!-- End .cta-desc -->
-                        </div><!-- End .col -->
+{{--    <div class="cta cta-display bg-image pt-4 pb-4" style="background-image: url({{asset('/')}}assets/images/backgrounds/cta/bg-6.jpg); margin-bottom: 30px;">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row justify-content-center">--}}
+{{--                <div class="col-md-10 col-lg-9 col-xl-8">--}}
+{{--                    <div class="row no-gutters flex-column flex-sm-row align-items-sm-center">--}}
+{{--                        <div class="col">--}}
+{{--                            <h3 class="cta-title text-white">Sign Up & Get 5% Off</h3><!-- End .cta-title -->--}}
+{{--                            <p class="cta-desc text-white">Amadr Dokan presents the best in product in Bangladesh </p><!-- End .cta-desc -->--}}
+{{--                        </div><!-- End .col -->--}}
 
-                        <div class="col-auto">
-                            <a href="login.html" class="btn btn-outline-white"><span>SIGN UP</span><i class="icon-long-arrow-right"></i></a>
-                        </div><!-- End .col-auto -->
-                    </div><!-- End .row no-gutters -->
-                </div><!-- End .col-md-10 col-lg-9 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .cta -->
+{{--                        <div class="col-auto">--}}
+{{--                            <a href="login.html" class="btn btn-outline-white"><span>SIGN UP</span><i class="icon-long-arrow-right"></i></a>--}}
+{{--                        </div><!-- End .col-auto -->--}}
+{{--                    </div><!-- End .row no-gutters -->--}}
+{{--                </div><!-- End .col-md-10 col-lg-9 -->--}}
+{{--            </div><!-- End .row -->--}}
+{{--        </div><!-- End .container -->--}}
+{{--    </div><!-- End .cta -->--}}
 
     <div class="container">
         <div class="heading heading-center mb-6 ">

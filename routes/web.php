@@ -54,10 +54,12 @@ Route::get('/clear', function() {
     Artisan::call('config:clear');
     return "Cleared!";
 });
+Route::get('/admin/main', [AdminController::class,'index'])->name('login');
+Route::post('/admin/main/checklogin', [AdminController::class,'checklogin'])->name('checklogin');
+Route::post('/orders/slug', [OrdersController::class,'getOrdersBySlug'])->name('orders.slug');
 
-Route::group(['prefix'=> 'admin','name'=>'Admin_Login'], function () {
-    Route::get('/main', [AdminController::class,'index'])->name('login');
-    Route::post('/main/checklogin', [AdminController::class,'checklogin'])->name('checklogin');
+Route::group(['prefix'=> 'admin','name'=>'Admin_Login', 'middleware' => 'auth'], function () {
+
     Route::get('main/successlogin', [AdminController::class,'successlogin'])->name('home');
     Route::get('/', [AdminController::class,'successlogin']);
     Route::post('main/logout', [AdminController::class,'logout'])->name('logout');
