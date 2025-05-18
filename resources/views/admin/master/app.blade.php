@@ -99,7 +99,7 @@
 <script src="{{ asset('/')}}AdminAssets/backend/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="{{ asset('/')}}AdminAssets/backend/dist/js/bootstrap-select.min.js"></script>
 
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('AdminAssets/js/app.js') }}"></script>
 
 <script>
     $(document).ready(function() {
