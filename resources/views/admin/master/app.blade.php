@@ -35,7 +35,7 @@
     <!-- New font start-->
     <link rel="stylesheet" href="{{  asset('/')}}AdminAssets/backend/dist/css/alt/bootstrap.min.css" />
     <link rel="stylesheet" href="{{  asset('/')}}AdminAssets/backend/dist/css/alt/bootstrap-select.min.css" />
-    <script src="{{  asset('/')}}AdminAssets/js/app.js') }}" defer></script>
+    <script src="{{  asset('/')}}AdminAssets/js/app.js')" defer></script>
 {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">--}}
 <!-- New font end-->
 </head>
