@@ -79,7 +79,7 @@ class OrdersController extends Controller
             session()->forget('products');
             session()->forget('subtotal');
 
-            return redirect()->back()->with('success', 'Order created successfully!');
+            return redirect()->route('orders.by.slug', ['slug' => $p['order_code']])->with('success', 'Order created successfully!');
 
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -225,7 +225,12 @@ class OrdersController extends Controller
     }
     public function getOrdersBySlug(Request $request)
     {
-        $orders = Orders::where('phone', $request->slug)->orWhere('order_code', $request->slug)->with(['payment', 'product'])->get();
+        $orders = Orders::where('order_code', $request->slug)->with(['payment', 'product'])->get();
+        return view('Landing.orders', ['orders' => $orders]);
+    }
+    public function getOrdersBySlugsss($slug)
+    {
+        $orders = Orders::where('order_code', $slug)->with(['payment', 'product'])->get();
         return view('Landing.orders', ['orders' => $orders]);
     }
 }
