@@ -39,8 +39,10 @@ class OrdersController extends Controller
             $c['phone'] = $request->phone;
             $c['firstName'] = $request->f_name;
             $c['lastName'] = $request->l_name;
-
-            $client = Clients::create($c);
+            $client = Clients::where('phone',  $c['phone'])->first();
+            if (!$client){
+                $client = Clients::create($c);
+            }
             $validatedData['order_code'] = 'AD' . rand(11111, 99999);
             $validatedData['client_id'] = $client->id;
             foreach ($products as $product) {
