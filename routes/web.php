@@ -57,6 +57,7 @@ Route::get('/clear', function() {
 Route::get('/admin/main', [AdminController::class,'index'])->name('login');
 Route::post('/admin/main/checklogin', [AdminController::class,'checklogin'])->name('checklogin');
 Route::post('/orders/slug', [OrdersController::class,'getOrdersBySlug'])->name('orders.slug');
+Route::get('/orders/{slug}', [OrdersController::class,'getOrdersBySlugsss'])->name('orders.by.slug');
 
 Route::group(['prefix'=> 'admin','name'=>'Admin_Login', 'middleware' => 'auth'], function () {
 
