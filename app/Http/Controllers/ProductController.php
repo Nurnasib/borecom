@@ -33,6 +33,8 @@ class ProductController extends Controller
             'description' => 'nullable', //
             'image' => 'required|image|max:2048',
             'additional_images.*' => 'image|max:2048',
+            'sub_category_id' => 'nullable|exists:sub_categories,id',
+
         ]);
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products_images', 'public');
@@ -137,6 +139,7 @@ class ProductController extends Controller
                 'image' => $product->image,
                 'quantity' => $quantity,
                 'size' => $size
+
             ];
         }
 
@@ -173,6 +176,8 @@ class ProductController extends Controller
             'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'stock' => 'nullable|integer',
             'description' => 'nullable|string|max:5000',
+            'sub_category_id' => 'nullable|exists:sub_categories,id',
+
         ]);
 
         $product = Products::findOrFail($id);

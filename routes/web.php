@@ -9,7 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\SubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +66,7 @@ Route::group(['prefix'=> 'admin','name'=>'Admin_Login', 'middleware' => 'auth'],
     Route::get('/download-db', [AdminController::class,'downloadDb'])->name('download-db');
 
 
+
 });
 Route::group(['name'=>'Category','middleware' => 'web',], function () {
     Route::get('/add-category', [CategoryController::class,'addCategory'])->name('add.category');
@@ -77,6 +78,19 @@ Route::group(['name'=>'Category','middleware' => 'web',], function () {
 
     Route::get('/res-search', [CategoryController::class, 'searchUrl'])->name('category.url.search');
 });
+
+Route::group(['prefix' => 'admin/subcategories', 'as' => 'subcategories.', 'middleware' => 'web'], function () {
+    Route::get('/', [SubCategoryController::class, 'index'])->name('index');
+    Route::get('/create', [SubCategoryController::class, 'create'])->name('create');
+    Route::post('/', [SubCategoryController::class, 'store'])->name('store');
+    Route::get('/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('edit');
+    Route::put('/{subcategory}', [SubCategoryController::class, 'update'])->name('update');
+    Route::delete('/{subcategory}', [SubCategoryController::class, 'destroy'])->name('destroy');
+});
+
+//Route::resource('subcategory', SubCategoryController::class);
+
+
 Route::group(['name'=>'Users','middleware' => 'web',], function () {
     Route::get('/all-user', [UserController::class,'allUser'])->name('all-user');
     Route::get('/user-status-update/{id}', [UserController::class,'statusUpdate'])->name('user-status-update');

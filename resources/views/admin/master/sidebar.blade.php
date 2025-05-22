@@ -30,9 +30,9 @@
                     </a>
                 </li>
 
-                <!-- Category -->
-                <li class="nav-item {{ request()->routeIs('category.index') || request()->is('admin/category/*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->routeIs('category.index') || request()->is('admin/category/*') ? 'active' : '' }}">
+                <!-- Category with Sub Category nested -->
+                <li class="nav-item {{ request()->routeIs('category.index') || request()->routeIs('subcategories.index') || request()->is('admin/category/*') || request()->is('admin/subcategories/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->routeIs('category.index') || request()->routeIs('subcategories.index') || request()->is('admin/category/*') || request()->is('admin/subcategories/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-list" style="color:#3fff00"></i>
                         <p>
                             Category
@@ -40,10 +40,18 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <!-- Category List -->
                         <li class="nav-item">
                             <a href="{{ route('category.index') }}" class="nav-link {{ request()->routeIs('category.index') || request()->is('admin/category/*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Category List</p>
+                            </a>
+                        </li>
+                        <!-- Sub Category List -->
+                        <li class="nav-item">
+                            <a href="{{ route('subcategories.index') }}" class="nav-link {{ request()->routeIs('subcategories.index') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sub Category List</p>
                             </a>
                         </li>
                     </ul>
