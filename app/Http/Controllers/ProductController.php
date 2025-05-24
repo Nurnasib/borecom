@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
@@ -10,13 +11,19 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Products::all();
-        return view('admin.product.list',['products'=>$products]);
+        $products = Products::with(['category', 'subCategory'])->get();
+        return view('admin.product.list', ['products' => $products]);
     }
+
     public function create()
     {
         $categories = Category::all();
-        return view('admin.product.add',['categories'=>$categories]);
+        $subcategories = SubCategory::all();
+
+        return view('admin.product.add',[
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+        ]);
     }
     public function store(Request $request)
     {
@@ -153,7 +160,9 @@ class ProductController extends Controller
     {
         $product = Products::findOrFail($id);
         $categories = Category::all();
-        return view('admin.product.edit', compact('product', 'categories'));
+        $subcategories = SubCategory::all();
+
+        return view('admin.product.edit', compact('product', 'categories','subcategories'));
     }
 
 
@@ -264,6 +273,11 @@ class ProductController extends Controller
         }
 
         return response()->json(['success' => false, 'error' => 'Product not found in cart.']);
+    }
+    public function getSubcategories($categoryId)
+    {
+        $subcategories = SubCategory::where('category_id', $categoryId)->get();
+        return response()->json($subcategories);
     }
 
 }

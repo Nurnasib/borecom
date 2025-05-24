@@ -37,6 +37,21 @@
                         </div>
 
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Sub Category</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="sub_category_id">
+                                    <option value="">-- Select Sub Category --</option>
+                                    @foreach($subcategories as $sub)
+                                        <option value="{{ $sub->id }}" {{ $product->sub_category_id == $sub->id ? 'selected' : '' }}>
+                                            {{ $sub->sub_category_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label">Price<i class="text-danger">*</i></label>
                             <div class="col-md-9">
                                 <input type="number" required class="form-control" name="price" value="{{ old('price', $product->price) }}">

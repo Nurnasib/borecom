@@ -34,6 +34,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Sub Category</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="sub_category_id">
+                                    <option value="">Select</option>
+                                    @foreach($subcategories as $sub)
+                                        <option value="{{ $sub->id }}">{{ $sub->sub_category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
 
 
 
@@ -138,3 +149,40 @@
         components: {FindUrl}
     }
 </script>
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#categorySelect').on('change', function() {
+                const categoryId = $(this).val();
+                const subCategorySelect = $('#subCategorySelect');
+
+                // Clear and show loading
+                subCategorySelect.html('<option value="">Loading...</option>');
+
+                if (categoryId) {
+                    $.ajax({
+                        url: '/admin/get-subcategories/' + categoryId,
+                        type: 'GET',
+                        success: function(response) {
+                            if(response.length > 0) {
+                                let options = '<option value="">Select Sub Category</option>';
+                                $.each(response, function(key, subcategory) {
+                                    options += `<option value="${subcategory.id}">${subcategory.sub_category_name}</option>`;
+                                });
+                                subCategorySelect.html(options);
+                            } else {
+                                subCategorySelect.html('<option value="">No subcategories found</option>');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                            subCategorySelect.html('<option value="">Error loading subcategories</option>');
+                        }
+                    });
+                } else {
+                    subCategorySelect.html('<option value="">Select Category First</option>');
+                }
+            });
+        });
+    </script>
+@endsection

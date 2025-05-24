@@ -21,5 +21,15 @@ class UserSeeder extends Seeder
             'roleId'=> 1,
             'password'=> bcrypt('123456789')
         ]);
+
+        User::firstOrCreate(
+            ['email' => 'superadmin2@gmail.com'],
+            [
+                'name' => 'Second Super Admin',
+                'roleId' => 1, // Same roleId = Super Admin
+                'password' => bcrypt('super456'),
+            ]
+        );
     }
 }
+
