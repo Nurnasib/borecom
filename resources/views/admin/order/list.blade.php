@@ -4,7 +4,7 @@
     <div class="content-wrapper">
         <div class="card">
             <div class="card-header">
-                <h3>{{ __('All Product List') }}</h3>
+                <h3>{{ __('All Order List') }}</h3>
             </div>
             <div class="card-body">
                 @if(Session::get('message'))
@@ -30,8 +30,8 @@
                             <th>#</th>
                             <th>Product Name</th>
                             <th>Customer Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <th>Code</th>
+                            <th>Price*qty</th>
                             <th>Transaction ID</th>
                             <th>Delivery Charge</th>
                             <th>City</th>
@@ -45,9 +45,9 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $val->product->product_name ?? 'N/A' }}</td>
-                                <td>{{ $val->f_name ?? 'N/A' }}</td>
-                                <td>{{ $val->qty??'n/a' }}</td>
-                                <td>{{ $val->product->price*$val->qty??'none' }}</td>
+                                <td>{{ $val->f_name ?? 'N/A' }}-{{ $val->phone ?? 'N/A' }}</td>
+                                <td>{{ $val->order_code ?? 'N/A' }}</td>
+                                <td>{{ $val->product->price??'none' }}*{{ $val->qty??'n/a' }}</td>
                                 <td>{{ $val->payment->transactionId??'none' }}</td>
                                 <td>{{ $val->city=='dhaka'?$val->product->delivery_charge_in:$val->product->delivery_charge_out }}</td>
                                 <td>{{ $val->city??'n/a' }}</td>
