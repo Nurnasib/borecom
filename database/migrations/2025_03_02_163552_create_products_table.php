@@ -25,6 +25,8 @@ class CreateProductsTable extends Migration
             $table->string('size')->nullable();
             $table->integer('category_id');
             $table->string('category_name');
+            $table->bigInteger('sub_category_id')->nullable();
+            $table->string('sub_category_name')->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->integer('stock')->nullable();

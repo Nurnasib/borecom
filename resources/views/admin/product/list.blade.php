@@ -27,6 +27,8 @@
                             <th>#</th>
                             <th>Product Name</th>
                             <th>Category Name</th>
+                            <th>Sub Category</th>
+
                             <th>Price</th>
                             <th>Deliver Charge</th>
                             <th>Image</th>
@@ -43,6 +45,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $val->product_name }}</td>
                                 <td>{{ $val->category_name }}</td>
+                                <td>{{ $val->subCategory ? $val->subCategory->sub_category_name : 'N/A' }}</td>
                                 <td>{{ $val->price }}</td>
                                 <td>
                                     Dhaka -{{ $val->delivery_charge_in }}<br>

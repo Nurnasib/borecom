@@ -31,10 +31,13 @@
             </figure><!-- End .product-media -->
 
             <div class="product-body">
-                <h3 class="product-title"><a href="product.html">{{$p->product_name}}</a></h3><!-- End .product-title -->
+                <h3 class="product-title">
+                    <a href="{{ route('product.detail', $p->id) }}">{{ $p->product_name }}</a>
+                </h3><!-- End .product-title -->
                 <div class="product-price">
-                    {{$p->price}} TK
+                    {{ $p->price }} TK
                 </div><!-- End .product-price -->
+            <!-- End .product-price -->
             </div><!-- End .product-body -->
             <div class="product-action">
                 <a href="/cart" class="btn-product btn-cart mr-2" ><span>Add Cart</span></a><br>

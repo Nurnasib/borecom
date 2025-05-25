@@ -12,6 +12,8 @@ class Products extends Model
         'product_name',
         'category_id',
         'category_name',
+        'sub_category_id',
+        'sub_category_name',
         'price',
         'purchase_price',
         'delivery_charge_in',
@@ -30,4 +32,9 @@ class Products extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
+    }
+
 }

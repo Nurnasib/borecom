@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
@@ -10,13 +11,19 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Products::all();
-        return view('admin.product.list',['products'=>$products]);
+        $products = Products::with(['category', 'subCategory'])->get();
+        return view('admin.product.list', ['products' => $products]);
     }
+
     public function create()
     {
         $categories = Category::all();
-        return view('admin.product.add',['categories'=>$categories]);
+        $subcategories = SubCategory::all();
+
+        return view('admin.product.add',[
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+        ]);
     }
     public function store(Request $request)
     {
@@ -33,6 +40,8 @@ class ProductController extends Controller
             'description' => 'nullable', //
             'image' => 'required|image|max:2048',
             'additional_images.*' => 'image|max:2048',
+            'sub_category_id' => 'nullable|exists:sub_categories,id',
+
         ]);
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('products_images', 'public');
@@ -44,7 +53,9 @@ class ProductController extends Controller
             }
         }
         $category = Category::where('id',$validatedData['category_id'])->first();
+        $subcategory = SubCategory::where('id',$validatedData['sub_category_id'])->first();
         $validatedData['category_name'] = $category->category_name;
+        $validatedData['sub_category_name'] = $subcategory->sub_category_name;
         $validatedData['created_by'] = auth()->user()->id;
         $validatedData['image'] = $imagePath ?? null;
         $validatedData['additional_images'] = json_encode($additionalImages);
@@ -69,7 +80,7 @@ class ProductController extends Controller
             ->first();
 
         if ($d['product']) {
-            $d['related_products'] = Products::where('category_id', $d['product']->category_id)
+            $d['related_products'] = Products::where('sub_category_id', $d['product']->sub_category_id)
                 ->where('status', 'active')
                 ->where('id', '!=', $d['product']->id) // Optional: exclude current product
                 ->limit(4)
@@ -137,6 +148,7 @@ class ProductController extends Controller
                 'image' => $product->image,
                 'quantity' => $quantity,
                 'size' => $size
+
             ];
         }
 
@@ -150,7 +162,9 @@ class ProductController extends Controller
     {
         $product = Products::findOrFail($id);
         $categories = Category::all();
-        return view('admin.product.edit', compact('product', 'categories'));
+        $subcategories = SubCategory::all();
+
+        return view('admin.product.edit', compact('product', 'categories','subcategories'));
     }
 
 
@@ -173,6 +187,8 @@ class ProductController extends Controller
             'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'stock' => 'nullable|integer',
             'description' => 'nullable|string|max:5000',
+            'sub_category_id' => 'nullable|exists:sub_categories,id',
+
         ]);
 
         $product = Products::findOrFail($id);
@@ -259,6 +275,11 @@ class ProductController extends Controller
         }
 
         return response()->json(['success' => false, 'error' => 'Product not found in cart.']);
+    }
+    public function getSubcategories($categoryId)
+    {
+        $subcategories = SubCategory::where('category_id', $categoryId)->get();
+        return response()->json($subcategories);
     }
 
 }

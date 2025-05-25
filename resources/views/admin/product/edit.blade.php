@@ -28,13 +28,33 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Product Category<i class="text-danger">*</i></label>
                             <div class="col-md-9">
-                                <select required class="form-control" name="category_id">
+                                <select required class="form-control" name="category_id" id="category-select">
+                                    <option value="">Select</option>
                                     @foreach($categories as $cat)
-                                        <option value="{{ $cat->id }}" {{ $product->category_id == $cat->id ? 'selected' : '' }}>{{ $cat->category_name }}</option>
+                                        <option value="{{ $cat->id }}" {{ $product->category_id == $cat->id ? 'selected' : '' }}>
+                                            {{ $cat->category_name }}
+                                        </option>
                                     @endforeach
                                 </select>
+
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Sub Category</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="sub_category_id" id="subcategory-select">
+                                    <option value="">-- Select Sub Category --</option>
+                                    @foreach($subcategories as $sub)
+                                        <option value="{{ $sub->id }}" {{ $product->sub_category_id == $sub->id ? 'selected' : '' }}>
+                                            {{ $sub->sub_category_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Price<i class="text-danger">*</i></label>
@@ -167,3 +187,42 @@
         </div>
     </div>
 @endsection
+<script src="{{ asset('/')}}AdminAssets/backend/plugins/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const subcatUrlBase = "{{ url('admin/get-subcategories') }}";
+
+        $.ajaxSetup({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        });
+
+        $('#category-select').on('change', function () {
+            const catId = this.value;
+            const $sub = $('#subcategory-select');
+
+            if (!catId) {
+                return $sub.html('<option value="">Select</option>');
+            }
+
+            $sub.html('<option>Loading…</option>');
+
+            $.getJSON(`${subcatUrlBase}/${catId}`)
+                .done(function (data) {
+                    $sub.empty().append('<option value="">Select</option>');
+                    $.each(data, function (_, subcat) {
+                        const selected = subcat.id == {{ $product->sub_category_id ?? 'null' }} ? 'selected' : '';
+                        $sub.append(`<option value="${subcat.id}" ${selected}>${subcat.sub_category_name}</option>`);
+                    });
+                })
+                .fail(function () {
+                    alert('Could not load sub-categories. Please try again.');
+                    $sub.html('<option value="">Select</option>');
+                });
+        });
+
+        // Trigger change if already selected
+        @if($product->category_id)
+        $('#category-select').trigger('change');
+        @endif
+    });
+</script>
