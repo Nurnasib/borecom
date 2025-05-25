@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 class LandingController extends Controller
 {
     public function landing() {
-        $data['products'] = Products::where('status', 'active')->take(4)->get();
+        $data['products'] = Products::where('status', 'active')->take(16)->get();
         $data['products_grouped'] = Products::where('status', 'active')->with('subCategory')->get()->groupBy('sub_category_id');
         return view('Landing.landing', $data);
     }
     public function loadMore(Request $request)
     {
         $offset = $request->offset ?? 0;
-        $limit = 4;
+        $limit = 8;
 
         $products = Products::latest()->where('status', 'active')->skip($offset)->take($limit)->get();
         $totalProducts = Products::count();

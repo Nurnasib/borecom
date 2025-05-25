@@ -21,6 +21,11 @@ use App\Http\Controllers\SubCategoryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/link', function () {
+    $target = '/home/amaderdo/borecom/storage/app/public';
+    $shortcut = '/home/amaderdo/public_html/storage';
+    symlink($target, $shortcut);
+});
 
 Route::get('/', [LandingController::class,'landing'])->name('landing');
 Route::get('/product_detail/{id}', [ProductController::class,'productDetail'])->name('product.detail');
