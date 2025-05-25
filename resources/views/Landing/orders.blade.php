@@ -50,7 +50,7 @@
                                     <th>Customer Name</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
-                                    <th>Transaction ID</th>
+                                    <th>Code</th>
                                     <th>Delivery Charge</th>
                                     <th>City</th>
                                     <th>Address</th>
@@ -65,7 +65,7 @@
                                         <td>{{ $val->f_name ?? 'N/A' }}</td>
                                         <td>{{ $val->qty??'n/a' }}</td>
                                         <td>{{ $val->product->price*$val->qty??'none' }}</td>
-                                        <td>{{ $val->payment->transactionId??'none' }}</td>
+                                        <td>{{ $val->payment->order_code??'none' }}</td>
                                         <td>{{ $val->city=='dhaka'?$val->product->delivery_charge_in:$val->product->delivery_charge_out }}</td>
                                         <td>{{ $val->city??'n/a' }}</td>
                                         <td>{{ $val->address??'n/a' }}</td>
