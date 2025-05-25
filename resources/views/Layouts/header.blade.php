@@ -78,11 +78,15 @@
                 <div class="header-search">
 
                 </div><!-- End .header-search -->
-
+                @php
+                    $cart = session('cart', []);
+                    $count = is_array($cart) ? count($cart) : 0;
+                @endphp
 
                 <div class="dropdown cart-dropdown">
                     <a href="/cart" class="dropdown-toggle" role="button">
                         <i class="icon-shopping-cart"></i>
+                        <span class="cart-count">{{ json_encode($count) }}</span>
                     </a>
 
 {{--                    <div class="dropdown-menu dropdown-menu-right">--}}

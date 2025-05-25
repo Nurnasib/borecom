@@ -53,7 +53,9 @@ class ProductController extends Controller
             }
         }
         $category = Category::where('id',$validatedData['category_id'])->first();
+        $subcategory = SubCategory::where('id',$validatedData['sub_category_id'])->first();
         $validatedData['category_name'] = $category->category_name;
+        $validatedData['sub_category_name'] = $subcategory->sub_category_name;
         $validatedData['created_by'] = auth()->user()->id;
         $validatedData['image'] = $imagePath ?? null;
         $validatedData['additional_images'] = json_encode($additionalImages);
@@ -78,7 +80,7 @@ class ProductController extends Controller
             ->first();
 
         if ($d['product']) {
-            $d['related_products'] = Products::where('category_id', $d['product']->category_id)
+            $d['related_products'] = Products::where('sub_category_id', $d['product']->sub_category_id)
                 ->where('status', 'active')
                 ->where('id', '!=', $d['product']->id) // Optional: exclude current product
                 ->limit(4)

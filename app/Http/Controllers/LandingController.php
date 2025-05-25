@@ -9,7 +9,7 @@ class LandingController extends Controller
 {
     public function landing() {
         $data['products'] = Products::where('status', 'active')->take(4)->get();
-        $data['products_grouped'] = Products::where('status', 'active')->with('category')->get()->groupBy('category_id');
+        $data['products_grouped'] = Products::where('status', 'active')->with('subCategory')->get()->groupBy('sub_category_id');
         return view('Landing.landing', $data);
     }
     public function loadMore(Request $request)

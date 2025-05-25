@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SubCategory;
 use App\Models\Category;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -70,4 +71,11 @@ class SubCategoryController extends Controller
         SubCategory::findOrFail($id)->delete();
         return redirect()->route('subcategories.index')->with('message', 'Sub-category deleted successfully.');
     }
+    // In SubCategoryController.php
+    public function getByCategory($categoryId)
+    {
+        $subcategories = SubCategory::where('category_id', $categoryId)->get();
+        return response()->json($subcategories);
+    }
+
 }

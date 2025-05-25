@@ -36,11 +36,13 @@
                                 <div id="product-zoom-gallery" class="product-image-gallery">
                                     @if(!empty($product->additional_images))
                                         @foreach(json_decode($product->additional_images) as $addi)
-                                            <a class="product-gallery-item active" href="#">
+                                            <a class="product-gallery-item image-popup" href="{{ asset('storage/' . $addi) }}">
                                                 <img src="{{ asset('storage/' . $addi) }}" alt="product side">
                                             </a>
                                         @endforeach
                                     @endif
+
+
                                 </div>
                             </div>
                         </div>
@@ -231,4 +233,33 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('.image-popup').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                mainClass: 'mfp-fade',
+                removalDelay: 300,
+                closeOnContentClick: true,
+                midClick: true
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.image-popup').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                mainClass: 'mfp-fade',
+                removalDelay: 300,
+                closeOnContentClick: true,
+                midClick: true
+            });
+        });
+    </script>
+
 @endsection

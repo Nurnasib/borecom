@@ -44,6 +44,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('order', OrdersController::class);
     Route::put('order/{order}/status', [OrdersController::class, 'updateStatus'])->name('order.updateStatus');
     Route::resource('payment', PaymentsController::class);
+    // add this:
+    Route::get('get-subcategories/{category}', [ProductController::class, 'getSubcategories'])
+        ->name('admin.getSubcategories');
 });
 Route::get('/clear', function() {
 
@@ -86,7 +89,10 @@ Route::group(['prefix' => 'admin/subcategories', 'as' => 'subcategories.', 'midd
     Route::get('/{subcategory}/edit', [SubCategoryController::class, 'edit'])->name('edit');
     Route::put('/{subcategory}', [SubCategoryController::class, 'update'])->name('update');
     Route::delete('/{subcategory}', [SubCategoryController::class, 'destroy'])->name('destroy');
+
 });
+// For dynamic sub-category loading by category ID
+//Route::get('/admin/get-subcategories/{categoryId}', [SubCategoryController::class, 'getByCategory']);
 
 //Route::resource('subcategory', SubCategoryController::class);
 

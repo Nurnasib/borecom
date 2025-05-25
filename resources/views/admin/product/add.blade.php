@@ -5,6 +5,7 @@
             <div class="card card-primary card-outline">
                 <div class="card-header text-center">{{ __('Add Product Form') }}</div>
                 <div class="card-body">
+
                     @if ($errors->any())
                         <div style="color: red;">
                             <ul>
@@ -25,10 +26,15 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Product Category<i class="text-danger">*</i></label>
                             <div class="col-md-9">
-                                <select required class="form-control" name="category_id">
+                                <select required
+                                        class="form-control"
+                                        name="category_id"
+                                        id="category-select"> {{-- ADD THIS ID --}}
                                     <option value="">Select</option>
                                     @foreach($categories as $cat)
-                                        <option value="{{$cat->id}}">{{$cat->category_name}}</option>
+                                        <option value="{{ $cat->id }}">
+                                            {{ $cat->category_name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -37,15 +43,14 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">Sub Category</label>
                             <div class="col-md-9">
-                                <select class="form-control" name="sub_category_id">
+                                <select class="form-control"
+                                        name="sub_category_id"
+                                        id="subcategory-select"> {{-- ADD THIS ID --}}
                                     <option value="">Select</option>
-                                    @foreach($subcategories as $sub)
-                                        <option value="{{ $sub->id }}">{{ $sub->sub_category_name }}</option>
-                                    @endforeach
+                                    {{-- We'll populate this by AJAX, so you can leave it empty or seed it --}}
                                 </select>
                             </div>
                         </div>
-
 
 
                         <div class="form-group row">
@@ -143,46 +148,54 @@
         </div>
     </div>
 @endsection
+{{--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
+<script src="{{ asset('/')}}AdminAssets/backend/plugins/jquery/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // your app’s base URL + the fixed path
+        const subcatUrlBase = "{{ url('admin/get-subcategories') }}";
+
+        // setup CSRF for AJAX
+        $.ajaxSetup({
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        });
+
+        // now bind your change handler
+        $('#category-select').on('change', function () {
+            console.log('chutiye1 — category changed!', this.value);
+
+            const catId = this.value;
+            const $sub  = $('#subcategory-select');
+
+            if (!catId) {
+                return $sub.html('<option value="">Select</option>');
+            }
+
+            $sub.html('<option>Loading…</option>');
+
+            $.getJSON(`${subcatUrlBase}/${catId}`)
+                .done(function (data) {
+                    $sub.empty().append('<option value="">Select</option>');
+                    $.each(data, function (_, subcat) {
+                        $sub.append($('<option>', {
+                            value: subcat.id,
+                            text:  subcat.sub_category_name
+                        }));
+                    });
+                })
+                .fail(function () {
+                    alert('Could not load sub-categories. Please try again.');
+                    $sub.html('<option value="">Select</option>');
+                });
+        });
+    });
+</script>
+
+
 <script>
     import FindUrl from "../../js/components/FindUrl";
     export default {
         components: {FindUrl}
     }
 </script>
-@section('script')
-    <script>
-        $(document).ready(function() {
-            $('#categorySelect').on('change', function() {
-                const categoryId = $(this).val();
-                const subCategorySelect = $('#subCategorySelect');
-
-                // Clear and show loading
-                subCategorySelect.html('<option value="">Loading...</option>');
-
-                if (categoryId) {
-                    $.ajax({
-                        url: '/admin/get-subcategories/' + categoryId,
-                        type: 'GET',
-                        success: function(response) {
-                            if(response.length > 0) {
-                                let options = '<option value="">Select Sub Category</option>';
-                                $.each(response, function(key, subcategory) {
-                                    options += `<option value="${subcategory.id}">${subcategory.sub_category_name}</option>`;
-                                });
-                                subCategorySelect.html(options);
-                            } else {
-                                subCategorySelect.html('<option value="">No subcategories found</option>');
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                            subCategorySelect.html('<option value="">Error loading subcategories</option>');
-                        }
-                    });
-                } else {
-                    subCategorySelect.html('<option value="">Select Category First</option>');
-                }
-            });
-        });
-    </script>
-@endsection

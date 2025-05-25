@@ -234,7 +234,7 @@
     @foreach($products_grouped as $category=>$product_c)
     <div class="container mb-5 mt-10">
         <div class="heading heading-center mb-4">
-            <h2 class="title">{{$product_c[0]->category->category_name}}</h2>
+            <h2 class="title">{{$product_c[0]->subCategory->sub_category_name??'N/A'}}</h2>
         </div><!-- End .heading -->
 
         <div class="row">
