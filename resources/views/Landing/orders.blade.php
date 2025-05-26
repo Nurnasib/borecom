@@ -36,52 +36,238 @@
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
 
-    <div class="page-content">
-        <div class="cart">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
-                                <thead class="bg-gradient-teal text-white">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product Name</th>
-                                    <th>Customer Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Code</th>
-                                    <th>Delivery Charge</th>
-                                    <th>City</th>
-                                    <th>Address</th>
-                                    <th>Status</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($orders as $val)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $val->product->product_name ?? 'N/A' }}</td>
-                                        <td>{{ $val->f_name ?? 'N/A' }}</td>
-                                        <td>{{ $val->qty??'n/a' }}</td>
-                                        <td>{{ $val->product->price*$val->qty??'none' }}</td>
-                                        <td>{{ $val->payment->order_code??'none' }}</td>
-                                        <td>{{ $val->city=='dhaka'?$val->product->delivery_charge_in:$val->product->delivery_charge_out }}</td>
-                                        <td>{{ $val->city??'n/a' }}</td>
-                                        <td>{{ $val->address??'n/a' }}</td>
-                                        <td>
-                                            {{$val->status}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div><!-- End .col-lg-9 -->
-                </div><!-- End .row -->
-            </div><!-- End .container -->
-        </div><!-- End .cart -->
-    </div><!-- End .page-content -->
+{{--    <div class="page-content">--}}
+{{--        <div class="cart">--}}
+{{--            <div class="container">--}}
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-12">--}}
+{{--                        <div class="table-responsive">--}}
+{{--                            <table class="table table-bordered table-striped">--}}
+{{--                                <thead class="bg-gradient-teal text-white">--}}
+{{--                                <tr>--}}
+{{--                                    <th>#</th>--}}
+{{--                                    <th>Product Name</th>--}}
+{{--                                    <th>Customer Name</th>--}}
+{{--                                    <th>Quantity</th>--}}
+{{--                                    <th>Price</th>--}}
+{{--                                    <th>Code</th>--}}
+{{--                                    <th>Delivery Charge</th>--}}
+{{--                                    <th>City</th>--}}
+{{--                                    <th>Address</th>--}}
+{{--                                    <th>Status</th>--}}
+{{--                                </tr>--}}
+{{--                                </thead>--}}
+{{--                                <tbody>--}}
+{{--                                @foreach($orders as $val)--}}
+{{--                                    <tr>--}}
+{{--                                        <td>{{ $loop->iteration }}</td>--}}
+{{--                                        <td>{{ $val->product->product_name ?? 'N/A' }}</td>--}}
+{{--                                        <td>{{ $val->f_name ?? 'N/A' }}</td>--}}
+{{--                                        <td>{{ $val->qty??'n/a' }}</td>--}}
+{{--                                        <td>{{ $val->product->price*$val->qty??'none' }}</td>--}}
+{{--                                        <td>{{ $val->payment->order_code??'none' }}</td>--}}
+{{--                                        <td>{{ $val->city=='dhaka'?$val->product->delivery_charge_in:$val->product->delivery_charge_out }}</td>--}}
+{{--                                        <td>{{ $val->city??'n/a' }}</td>--}}
+{{--                                        <td>{{ $val->address??'n/a' }}</td>--}}
+{{--                                        <td>--}}
+{{--                                            {{$val->status}}--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                        </div>--}}
+{{--                    </div><!-- End .col-lg-9 -->--}}
+{{--                </div><!-- End .row -->--}}
+{{--            </div><!-- End .container -->--}}
+{{--        </div><!-- End .cart -->--}}
+{{--    </div><!-- End .page-content -->--}}
+
+
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #invoice, #invoice * {
+                visibility: visible;
+            }
+            #invoice {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            color: #333;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .invoice-header img {
+            max-height: 60px;
+            margin: 0 auto 10px auto;
+            /*margin-bottom: 10px;*/
+        }
+
+        .invoice-header h2 {
+            margin-bottom: 5px;
+        }
+
+        .order-info {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .order-info p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+
+        .product-list h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            color: #4CAF50;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .product-table th,
+        .product-table td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .product-table th {
+            background-color: #4CAF50;
+            color: #fff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .total-section {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 16px;
+        }
+
+        .total-section p {
+            margin: 6px 0;
+        }
+
+        .print-btn {
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .print-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <div class="no-print">
+        <button onclick="window.print()" class="print-btn">🖨️ Print Invoice</button>
+    </div>
+
+    <div class="invoice-container" id="invoice">
+        @if(count($orders) > 0)
+            @php
+                $first = $orders[0];
+                $deliveryCharge = $first->city == 'dhaka' ? ($first->product->delivery_charge_in ?? 0) : ($first->product->delivery_charge_out ?? 0);
+                $subtotal = 0;
+            @endphp
+
+            <div class="invoice-header">
+                <!-- Company logo and name -->
+                <img src="{{ asset('/')}}adw.jpeg" alt="Company Logo" class="">
+{{--                <h2>Amader Dokan</h2>--}}
+                <p><strong>Invoice ID:</strong> {{ $first->payment->order_code ?? 'N/A' }}</p>
+                <p><strong>Date:</strong> {{ date('d M, Y') }}</p>
+            </div>
+
+            <div class="order-info">
+                <p><strong>Customer Name:</strong> {{ $first->f_name ?? 'N/A' }}</p>
+                <p><strong>City:</strong> {{ ucfirst($first->city) ?? 'N/A' }}</p>
+                <p><strong>Address:</strong> {{ $first->address ?? 'N/A' }}</p>
+                <p><strong>Status:</strong> {{ ucfirst($first->status) }}</p>
+            </div>
+
+            <div class="product-list">
+                <h4>Products</h4>
+                <table class="product-table">
+                    <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Total Price (BDT)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($orders as $val)
+                        @php
+                            $productTotal = ($val->product->price ?? 0) * ($val->qty ?? 0);
+                            $subtotal += $productTotal;
+                        @endphp
+                        <tr>
+                            <td>{{ $val->product->product_name ?? 'N/A' }}</td>
+                            <td>{{ $val->qty ?? 'n/a' }}</td>
+                            <td>{{ $productTotal }} BDT</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="total-section">
+                <p><strong>Subtotal:</strong> {{ $subtotal }} BDT</p>
+                <p><strong>Delivery Charge:</strong> {{ $deliveryCharge }} BDT</p>
+                <p><strong>Total Amount:</strong> {{ $subtotal + $deliveryCharge }} BDT</p>
+            </div>
+        @else
+            <p>No orders available to display.</p>
+        @endif
+    </div>
+
+
+
 @endsection
 
 

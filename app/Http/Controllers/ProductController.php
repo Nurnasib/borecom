@@ -233,6 +233,8 @@ class ProductController extends Controller
         // Update category name
         $category = Category::find($validatedData['category_id']);
         $validatedData['category_name'] = $category ? $category->category_name : $product->category_name;
+        $subcategory = SubCategory::find($validatedData['sub_category_id']);
+        $validatedData['sub_category_name'] = $subcategory ? $subcategory->sub_category_name : $product->sub_category_name;
 
         // Update the product
         $product->update($validatedData);

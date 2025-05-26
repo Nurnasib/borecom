@@ -149,7 +149,7 @@
                             <button onclick="sendCartDataToRoute()" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</button>
                         </div><!-- End .summary -->
 
-                        <a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                        <a href="{{ route('landing') }}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                     </aside><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
             </div><!-- End .container -->
