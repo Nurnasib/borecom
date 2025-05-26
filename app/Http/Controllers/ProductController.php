@@ -263,23 +263,36 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success', 'Product deleted successfully!');
     }
-    public function removeFromCart(Request $request)
-    {
-        $id = $request->input('id');
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
-            return response()->json(['success' => true]);
-        }
-
-        return response()->json(['success' => false, 'error' => 'Product not found in cart.']);
-    }
+//    public function removeFromCart(Request $request)
+//    {
+//        $id = $request->input('id');
+//        $cart = session()->get('cart', []);
+//
+//        if (isset($cart[$id])) {
+//            unset($cart[$id]);
+//            session()->put('cart', $cart);
+//            return response()->json(['success' => true]);
+//        }
+//
+//        return response()->json(['success' => false, 'error' => 'Product not found in cart.']);
+//    }
     public function getSubcategories($categoryId)
     {
         $subcategories = SubCategory::where('category_id', $categoryId)->get();
         return response()->json($subcategories);
+    }
+
+    public function removeFromCart(Request $request)
+    {
+        $key = $request->key;
+
+        $cart = session()->get('cart', []);
+        if (isset($cart[$key])) {
+            unset($cart[$key]);
+            session()->put('cart', $cart);
+        }
+
+        return response()->json(['success' => true]);
     }
 
 }

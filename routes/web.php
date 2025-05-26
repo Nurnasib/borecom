@@ -115,7 +115,9 @@ Route::view('forgot-pass', 'reset-pass')->name('password.reset');
 
 // Cart routes
 //Route::get('/cart', [ProductController::class, 'viewCart'])->name('cart.view');
-Route::get('/cart/remove/{key}', [ProductController::class, 'cartRemoveProduct'])->name('cart.remove');
+Route::post('/cart/remove', [ProductController::class, 'removeFromCart'])->name('cart.remove');
+
+//Route::get('/cart/remove/{key}', [ProductController::class, 'cartRemoveProduct'])->name('cart.remove');
 Route::get('/cart/update/{key}', [ProductController::class, 'cartUpdateProduct'])->name('cart.update');
 
 // Checkout routes

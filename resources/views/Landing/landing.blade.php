@@ -272,7 +272,7 @@
 
                         <div class="product-action">
                             <a href="/cart" class="btn-product btn-cart mr-2" ><span>Add Cart</span></a><br>
-                            <a  class="btn-product btn-cart "><span>Buy Now</span></a>
+                            <a href="/cart" class="btn-product btn-cart "><span>Buy Now</span></a>
                         </div>
                     </div>
                 </div>
@@ -321,6 +321,7 @@
             });
     });
 </script>
+
 
 @endsection
 

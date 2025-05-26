@@ -79,8 +79,8 @@
                                     </div><!-- End .col-sm-6 -->
                                 </div><!-- End .row -->
 
-                                <label>Email address *</label>
-                                <input type="email" name="email" class="form-control" required>
+                                <label>Email address </label>
+                                <input type="email" name="email" class="form-control">
 
 
                             </div><!-- End .col-lg-9 -->
@@ -137,7 +137,7 @@
 {{--                                        </tr>--}}
                                         <tr>
                                             <td>Bkash:</td>
-                                            <td>01784033051</td>
+                                            <td>01910-998436</td>
                                         </tr>
 {{--                                        <tr>--}}
 {{--                                            --}}

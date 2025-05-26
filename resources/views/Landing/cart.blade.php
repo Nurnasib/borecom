@@ -29,7 +29,7 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Shop</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
             </ol>
@@ -240,7 +240,69 @@
                 });
         }
     </script>
+    <!-- Include SweetAlert2 if not already included -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        function removeFromCart(key) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to remove this item?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6'
+            }).then((result) => {
+                if (!result.isConfirmed) return;
+
+                fetch("{{ route('cart.remove') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ key: key })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Remove row from table
+                            const row = document.querySelector(`tr[data-key="${key}"]`);
+                            if (row) row.remove();
+
+                            // Optionally: Recalculate subtotal
+                            let newSubtotal = 0;
+                            document.querySelectorAll('tr[data-key]').forEach(row => {
+                                const price = parseFloat(row.dataset.price);
+                                const qty = parseInt(row.querySelector('.quantity-input').value) || 1;
+                                newSubtotal += price * qty;
+                            });
+
+                            const formattedSubtotal = newSubtotal.toFixed(2) + ' tk';
+
+                            const subtotalElement = document.getElementById('cart-subtotal');
+                            const totalElement = document.getElementById('cart-total');
+                            const summaryElement = document.getElementById('cart-summary-subtotal');
+
+                            if (subtotalElement) subtotalElement.innerHTML = `<strong>${formattedSubtotal}</strong>`;
+                            if (totalElement) totalElement.innerHTML = `<strong>${formattedSubtotal}</strong>`;
+                            if (summaryElement) summaryElement.innerHTML = `<strong>${formattedSubtotal}</strong>`;
+
+                            // If cart is empty, show empty message
+                            if (document.querySelectorAll('tr[data-key]').length === 0) {
+                                const tbody = document.getElementById('cart-body');
+                                tbody.innerHTML = `<tr><td colspan="5" class="text-center">Your cart is empty</td></tr>`;
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error removing item:', error);
+                    });
+            });
+        }
+    </script>
 
 @endsection
 

@@ -164,6 +164,9 @@
     <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
+    <!-- Include SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const sizeSelect = document.getElementById("size");
@@ -174,7 +177,11 @@
                 const size = sizeSelect.value;
                 const qty = qtyInput.value;
                 if (!size) {
-                    alert("Please select a size before proceeding.");
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Please select a size!',
+                        confirmButtonText: 'OK'
+                    });
                     return false;
                 }
 
@@ -186,13 +193,23 @@
 
             addToCartBtn.addEventListener("click", function (e) {
                 if (updateLinks()) {
-                    alert('Added to cart successfully!');
+                    e.preventDefault(); // prevent default to show modal first
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added to cart successfully!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        // After alert, go to the link
+                        window.location.href = addToCartBtn.href;
+                    });
                 } else {
                     e.preventDefault();
                 }
             });
         });
     </script>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
