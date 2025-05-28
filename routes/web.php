@@ -9,6 +9,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRegistrationController;
+
+
 use App\Http\Controllers\SubCategoryController;
 
 /*
@@ -124,3 +127,5 @@ Route::get('/cart/update/{key}', [ProductController::class, 'cartUpdateProduct']
 //Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
 //Route::post('/place-order', [ProductController::class, 'placeOrder'])->name('place.order');
 Route::get('/order-confirmation/{id}', [ProductController::class, 'orderConfirmation'])->name('order.confirmation');
+Route::get('/register', [UserRegistrationController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [UserRegistrationController::class, 'register']);

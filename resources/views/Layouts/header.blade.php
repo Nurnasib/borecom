@@ -89,7 +89,15 @@
                         <span class="cart-count">{{ json_encode($count) }}</span>
                     </a>
 
-{{--                    <div class="dropdown-menu dropdown-menu-right">--}}
+
+                    <div class="dropdown user-dropdown" style="margin-left: 15px;">
+                        <a href="/register" class="dropdown-toggle" role="button" title="Register">
+                            <i class="icon-user" style="font-size: 22px;"></i>
+                        </a>
+                    </div>
+
+
+                    {{--                    <div class="dropdown-menu dropdown-menu-right">--}}
 {{--                        <div class="dropdown-cart-products">--}}
 {{--                            <div class="product">--}}
 {{--                                <div class="product-cart-details">--}}
